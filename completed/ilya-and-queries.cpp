@@ -12,19 +12,16 @@ int32_t main() {
     int m;
     cin >> s >> m;
     int n = s.size() - 1;
-    vector<int> a;
+    vector<int> prefixSum{0};
 
     for (int i = 0; i < n; i++) {
-        a.push_back(s[i] == s[i + 1] ? 1 : 0);
+        prefixSum.push_back(prefixSum.back() + (s[i] == s[i + 1] ? 1 : 0));
     }
-    a.push_back(0);
 
     while(m-->0) {
         int l, r, ans = 0;
         cin >> l >> r;
-        for (int i = l; i < r; i++) {
-            ans += a[i - 1];
-        }
+        ans += prefixSum[r - 1] - prefixSum[l - 1];
 
         cout << ans << endl;
     }
