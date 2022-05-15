@@ -1,3 +1,6 @@
+//Category: 1300
+//Complexity: O(n)
+//Link: https://codeforces.com/problemset/problem/459/B
 #include <bits/stdc++.h>
 #define int long long int
 

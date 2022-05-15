@@ -1,3 +1,7 @@
+//Category: 1300
+//Complexity: O(1) (This is kinda cheating, bc it precomputes the set of numbers that are T-Primes
+//Link: https://codeforces.com/problemset/problem/230/B
+//Note: A T-Prime would be the square of a prime number.
 #include <bits/stdc++.h>
 
 using namespace std;

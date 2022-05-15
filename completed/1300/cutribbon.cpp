@@ -1,3 +1,7 @@
+//Category: 1300
+//Complexity O(n)
+//Link: https://codeforces.com/problemset/problem/189/A
+//Note: Dp[i] contains the max cuts up the ribbon from 0 to i.
 #include <bits/stdc++.h>
 
 using namespace std;

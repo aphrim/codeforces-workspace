@@ -1,3 +1,7 @@
+//Category: 1300
+//Complexity: I don't want to think about it bc I wrote this like 2 months ago, but probably O(nlog(n))
+//Link: https://codeforces.com/problemset/problem/451/B
+//Note: This is a mess, but it works. Ignore this, figuring it out is a waste of time.
 #include <bits/stdc++.h>
 #define int long long int
 
