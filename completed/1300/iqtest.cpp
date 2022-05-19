@@ -1,3 +1,7 @@
+//Category: 1300
+//Time Complexity: Worst case O(n)
+//Link: https://codeforces.com/problemset/problem/25/A
+//This was pretty easy for a 1300, 900 or 1000 would have been more suitable.
 #include <bits/stdc++.h>
 
 using namespace std;

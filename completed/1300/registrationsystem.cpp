@@ -1,3 +1,7 @@
+//Category: 1300
+//Complexity: O(n) not including hashing on the users map.
+//Link: https://codeforces.com/problemset/problem/4/C
+//Very easy 1300, this is suitable for 800 or 900 IMO.
 #include <bits/stdc++.h>
 
 using namespace std;
