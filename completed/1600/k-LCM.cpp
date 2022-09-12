@@ -1,3 +1,6 @@
+//Category: 1600
+//Link: https://codeforces.com/problemset/problem/1497/C2
+//Complexity: O(1 + k - 3);
 #include <bits/stdc++.h>
 #define int long long int
 
@@ -25,4 +28,27 @@ int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
+
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, k;
+        cin >> n >> k;
+
+        n -= (k - 3);
+
+        for (int i = 0; i < k - 3; i++) {
+            cout << 1 << " ";
+        }
+
+        if (n % 2 == 0 && n % 4 != 0) { 
+            cout << n / 2 - 1 << " " << n / 2 - 1 << " " << 2 << endl; 
+        } 
+        if (n % 4 == 0) {
+            cout << n / 4 << " " << n / 4 << " " << n / 2 << endl;
+        }
+        if (n % 2 == 1) {
+            cout << n / 2 << " "  << n / 2 << " " << 1 << endl;
+        }
+    }
 }

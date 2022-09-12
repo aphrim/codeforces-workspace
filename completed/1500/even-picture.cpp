@@ -1,3 +1,6 @@
+//Category: 1500
+//Link: https://codeforces.com/problemset/problem/1368/C
+//Complexity: O(n)
 #include <bits/stdc++.h>
 #define int long long int
 
@@ -21,8 +24,27 @@ struct custom_hash {
     }
 };
 
+void draw(int offset) {
+    cout << 0 + offset << " " << 0 + offset << endl;
+    cout << 1 + offset << " " << 0 + offset << endl;
+    cout << 0 + offset << " " << 1 + offset << endl;
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
+
+    int n;
+    cin >> n;
+    
+    cout << n * 3 + 4 << endl;
+
+    for (int i = 0; i < n + 1; i++) {
+        draw(i);
+    }
+    cout << n + 1 << " " << n + 1 << endl;
+
+
+
 }
