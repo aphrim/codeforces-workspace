@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 #define int long long int
 
-//#define USACO
+#define USACO
 
 using namespace std;
 
@@ -30,7 +30,31 @@ int32_t main() {
     cout.tie(0);
 
 #ifdef USACO
-    freopen("a.in", "r", stdin);
-    freopen("a.out", "w", stdout);
+    freopen("shuffle.in", "r", stdin);
+    freopen("shuffle.out", "w", stdout);
 #endif
+
+    int n;
+    cin >> n;
+    vector<int> shuffle(n);
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        shuffle[x-1] = i;
+    }
+
+    vector<int> a(n);
+    cin >> a;
+
+    for (int i = 0; i < 3; i++) {
+        vector<int> next(n);
+        for (int j = 0; j < n; j++) {
+            next[shuffle[j]] = a[j];
+        }
+        a = next;
+    }
+
+    for (int i = 0; i < n; i++)
+        cout << a[i] << endl;
+
 }

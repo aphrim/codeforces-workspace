@@ -1,7 +1,8 @@
+//Category: 1300
+//Link: https://codeforces.com/problemset/problem/1555/B
+//Complexity: O(1)
 #include <bits/stdc++.h>
 #define int long long int
-
-//#define USACO
 
 using namespace std;
 
@@ -29,8 +30,26 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-#ifdef USACO
-    freopen("a.in", "r", stdin);
-    freopen("a.out", "w", stdout);
-#endif
+    int t;
+    cin >> t;
+    while (t--) {
+        int W, H;
+        cin >> W >> H;
+        int x1, y1, x2, y2;
+        cin >> x1 >> y1 >> x2 >> y2;
+        int w, h;
+        cin >> w >> h;
+
+        if ((h + abs(y2 - y1) > H) && (w + abs(x2 - x1) > W)) {
+            cout << -1 << endl;
+            continue;
+        }
+
+        int dUp = 1e10, dLeft = 1e10;
+        if (h + abs(y2 - y1) <= H)
+            dUp = min(max(0ll, h - y1), max(0ll, y2 - (H - h)));
+        if (w + abs(x2 - x1) <= W)
+            dLeft = min(max(0ll, w - x1), max(0ll, x2 - (W - w)));
+        cout << min(dUp, dLeft) << endl;
+    }
 }

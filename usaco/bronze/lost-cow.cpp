@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 #define int long long int
 
-//#define USACO
+#define USACO
 
 using namespace std;
 
@@ -30,7 +30,27 @@ int32_t main() {
     cout.tie(0);
 
 #ifdef USACO
-    freopen("a.in", "r", stdin);
-    freopen("a.out", "w", stdout);
+    freopen("lostcow.in", "r", stdin);
+    freopen("lostcow.out", "w", stdout);
 #endif
+
+    int x, y;
+    cin >> x >> y;
+
+    int pos = x, dis = 0, moveDis = 1;
+
+    while (true) {
+        int newPos = x + moveDis;
+        moveDis *= -2;
+        if (min(newPos, pos) <= y && max(newPos, pos) >= y)
+            break;
+        dis += abs(pos - newPos);
+        pos = newPos;
+    }
+
+    dis += abs(y - pos);
+    cout << dis << endl;
+
+
+
 }

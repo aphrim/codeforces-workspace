@@ -1,7 +1,9 @@
+//Category: 1500
+//Link: https://codeforces.com/contest/863/problem/B
+//Complexity: O(n^3)
+//O(nlogn) is possible, but don't feel like coding it.
 #include <bits/stdc++.h>
 #define int long long int
-
-//#define USACO
 
 using namespace std;
 
@@ -28,9 +30,33 @@ int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-
-#ifdef USACO
-    freopen("a.in", "r", stdin);
-    freopen("a.out", "w", stdout);
-#endif
+ 
+    int n;
+    cin >> n;
+    vector<int> a(n * 2);
+    cin >> a;
+ 
+    sort(a.begin(), a.end());
+ 
+    int ret = INT_MAX;
+    for (int i = 0; i < n * 2; i++) {
+        for (int j = 0; j < n * 2; j++) {
+            if (i == j) continue;
+            int last = -1;
+            int cur = 0;
+            for (int k = 0; k < n * 2; k++) {
+                if (k == i || k == j) continue;
+                if (last == -1) 
+                    last = a[k];
+                else {
+                    cur += a[k] - last;
+                    last = -1;
+                }
+            }
+            ret = min(ret, cur);
+        }
+    }
+ 
+    cout << ret << endl;
+ 
 }

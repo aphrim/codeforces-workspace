@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 #define int long long int
 
-//#define USACO
+#define USACO
 
 using namespace std;
 
@@ -30,7 +30,30 @@ int32_t main() {
     cout.tie(0);
 
 #ifdef USACO
-    freopen("a.in", "r", stdin);
-    freopen("a.out", "w", stdout);
+    freopen("cowsignal.in", "r", stdin);
+    freopen("cowsignal.out", "w", stdout);
 #endif
+
+    int m, n, k;
+    cin >> m >> n >> k;
+
+    vector<vector<char>> a(m, vector<char>(n));
+    cin >> a;
+    vector<vector<char>> ret;
+
+    for (int i = 0; i < m; i++) {
+        vector<char> line(n * k);
+        for (int c = 0; c < n; c++)
+            for (int j = 0; j < k; j++)
+                line[c * k + j] = a[i][c];
+
+        for (int j = 0; j < k; j++) ret.push_back(line);
+    }
+
+    for (vector<char> line : ret) {
+        for (char c :  line)
+            cout << c;
+        cout << endl;
+    }
+
 }
