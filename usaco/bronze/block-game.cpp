@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 #define int long long int
 
-//#define USACO
+#define USACO
 
 using namespace std;
 
@@ -30,7 +30,27 @@ int32_t main() {
     cout.tie(0);
 
 #ifdef USACO
-    freopen("a.in", "r", stdin);
-    freopen("a.out", "w", stdout);
+    freopen("blocks.in", "r", stdin);
+    freopen("blocks.out", "w", stdout);
 #endif
+
+    int n;
+    cin >> n;
+
+    vector<int> counts(26);
+
+    for (int i = 0; i < n; i++) {
+        string a, b;
+        cin >> a >> b;
+        vector<int> countsa(26), countsb(26);
+        for (char c : a) countsa[c - 'a']++;
+        for (char c : b) countsb[c - 'a']++;
+
+        for (int j = 0; j < 26; j++) {
+            counts[j] += max(countsa[j], countsb[j]);
+        }
+    }
+
+    for (int x : counts)
+        cout << x << endl;
 }

@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 #define int long long int
 
-//#define USACO
+#define USACO
 
 using namespace std;
 
@@ -30,7 +30,30 @@ int32_t main() {
     cout.tie(0);
 
 #ifdef USACO
-    freopen("a.in", "r", stdin);
-    freopen("a.out", "w", stdout);
+    freopen("blist.in", "r", stdin);
+    freopen("blist.out", "w", stdout);
 #endif
+
+    int n;
+    cin >> n;
+
+    vector<int> starts(1001), ends(1001);
+
+    for (int i = 0; i < n; i++) {
+        int s, t, b;
+        cin >> s >> t >> b;
+        starts[s] = b;
+        ends[t] = b;
+    }
+
+    int ret = 0, inUse = 0;
+
+
+    for (int i = 0; i < 1001; i++) {
+        inUse += starts[i];
+        inUse -= ends[i];
+        ret = max(ret, inUse);
+    }
+
+    cout << ret << endl;
 }

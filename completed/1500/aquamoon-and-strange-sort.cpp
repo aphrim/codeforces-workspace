@@ -1,13 +1,13 @@
+//Category: 1500
+//Link: https://codeforces.com/problemset/problem/1545/A
+//Complexity: O(n)
 #include <bits/stdc++.h>
 #define int long long int
-
-//#define USACO
 
 using namespace std;
 
 template<typename T> istream& operator>>(istream& in, vector<T>& a) {for(auto &x : a) in >> x; return in;};
 template<typename T> ostream& operator<<(ostream& out, vector<T>& a) {for(auto &x : a) out << x << ' '; return out;};
-template<typename K, typename V> ostream& operator<<(ostream& out, map<K, V>& a) {for(pair<K, V> p : a) out << p.first << " " << p.second << '\n'; return out;};
 
 //Credit: https://codeforces.com/blog/entry/62393
 struct custom_hash {
@@ -29,8 +29,33 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-#ifdef USACO
-    freopen("a.in", "r", stdin);
-    freopen("a.out", "w", stdout);
-#endif
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        unordered_map<int, int> countsOr;
+        unordered_map<int, int> countsSo;
+        cin >> a;
+        
+        for (int i = 0; i < a.size(); i += 2) {
+            countsOr[a[i]]++;
+        }
+
+        sort(a.begin(), a.end());
+
+        for (int i = 0; i < a.size(); i += 2) {
+            countsSo[a[i]]++;
+        }
+
+        bool b = true;
+
+        for (pair<int, int> p : countsOr) {
+            if (p.second != countsSo[p.first]) b = false;
+        }
+
+        if (b) cout << "YES" << endl;
+        else cout << "NO" << endl;
+    }
 }

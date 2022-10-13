@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 #define int long long int
 
-//#define USACO
+#define USACO
 
 using namespace std;
 
@@ -30,7 +30,14 @@ int32_t main() {
     cout.tie(0);
 
 #ifdef USACO
-    freopen("a.in", "r", stdin);
-    freopen("a.out", "w", stdout);
+    freopen("square.in", "r", stdin);
+    freopen("square.out", "w", stdout);
 #endif
+
+    vector<int> a(4), b(4);
+    cin >> a >> b;
+    vector<int> c{min(a[0], b[0]), min(a[1], b[1]), max(a[2], b[2]), max(a[3], b[3])};
+    int sideLength = max(abs(c[2] - c[0]), abs(c[3] - c[1]));
+    cout << sideLength * sideLength << endl;
+
 }

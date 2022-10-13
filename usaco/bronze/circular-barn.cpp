@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 #define int long long int
 
-//#define USACO
+#define USACO
 
 using namespace std;
 
@@ -30,7 +30,30 @@ int32_t main() {
     cout.tie(0);
 
 #ifdef USACO
-    freopen("a.in", "r", stdin);
-    freopen("a.out", "w", stdout);
+    freopen("cbarn.in", "r", stdin);
+    freopen("cbarn.out", "w", stdout);
 #endif
+
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    cin >> a;
+
+    int ret = INT_MAX;
+    for (int i = 0; i < n; i++) {
+        int cost = 0, cur = 0, curCows = 0;
+        while (true) {
+            cost += cur;
+            curCows++;
+
+            if (a[(i + cur) % n] == curCows) {
+                cur++;
+                curCows = 0;
+                if (cur == n) break;
+            }
+        }
+        ret = min(ret, cost);
+    }
+
+    cout << ret << endl;
 }

@@ -1,13 +1,13 @@
+//Category: 1300
+//Link: https://codeforces.com/problemset/problem/1364/B
+//Complexity: O(n)
 #include <bits/stdc++.h>
 #define int long long int
-
-//#define USACO
 
 using namespace std;
 
 template<typename T> istream& operator>>(istream& in, vector<T>& a) {for(auto &x : a) in >> x; return in;};
 template<typename T> ostream& operator<<(ostream& out, vector<T>& a) {for(auto &x : a) out << x << ' '; return out;};
-template<typename K, typename V> ostream& operator<<(ostream& out, map<K, V>& a) {for(pair<K, V> p : a) out << p.first << " " << p.second << '\n'; return out;};
 
 //Credit: https://codeforces.com/blog/entry/62393
 struct custom_hash {
@@ -29,8 +29,23 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-#ifdef USACO
-    freopen("a.in", "r", stdin);
-    freopen("a.out", "w", stdout);
-#endif
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        cin >> a;
+
+        vector<int> ret{a[0]};
+        
+        for (int i = 1; i < a.size() - 1; i++) {
+            if (a[i - 1] - a[i] < 0 == a[i + 1] - a[i] < 0)
+                ret.push_back(a[i]);
+        }
+
+        ret.push_back(a.back());
+
+        cout << ret.size() << " " << ret << endl;
+    }
 }

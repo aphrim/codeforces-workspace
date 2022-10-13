@@ -1,7 +1,8 @@
+//TLE on test case 15, can be improved
 #include <bits/stdc++.h>
 #define int long long int
 
-//#define USACO
+#define USACO
 
 using namespace std;
 
@@ -30,7 +31,21 @@ int32_t main() {
     cout.tie(0);
 
 #ifdef USACO
-    freopen("a.in", "r", stdin);
-    freopen("a.out", "w", stdout);
+    freopen("censor.in", "r", stdin);
+    freopen("censor.out", "w", stdout);
 #endif
+
+    string s, t;
+    cin >> s >> t;
+
+    int tS = t.size();
+    for (int i = tS; i <= s.size(); i++) {
+        if (i >= tS)
+            if (s.substr(i - tS, tS) == t) {
+                s.erase(i - tS, tS);
+                i -= tS;
+            }
+    }
+
+    cout << s << endl;
 }

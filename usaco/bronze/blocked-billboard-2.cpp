@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 #define int long long int
 
-//#define USACO
+#define USACO
 
 using namespace std;
 
@@ -30,7 +30,32 @@ int32_t main() {
     cout.tie(0);
 
 #ifdef USACO
-    freopen("a.in", "r", stdin);
-    freopen("a.out", "w", stdout);
+    freopen("billboard.in", "r", stdin);
+    freopen("billboard.out", "w", stdout);
 #endif
+
+    vector<int> a(4), b(4);
+    cin >> a >> b;
+
+    int w = a[2] - a[0], h = a[3] - a[1];
+    int verticalIntersection = min(a[3], b[3]) - max(a[1], b[1]);
+    int horizontalIntersection = min(a[2], b[2]) - max(a[0], b[0]);
+
+    if (horizontalIntersection * verticalIntersection <= 0) {
+        cout << w * h << endl;
+        return 0;
+    } 
+
+    if ((b[0] > a[0] && b[0] < a[2] && b[2] > a[0] && b[2] < a[2]) ||
+         (b[1] > a[1] && b[1] < a[3] && b[3] > a[1] && b[3] < a[3])) {
+        cout << w * h << endl;
+        return 0;
+    }
+
+    if (horizontalIntersection >= w)
+        cout << w * (h - verticalIntersection) << endl;
+    else if (verticalIntersection >= h)
+        cout << h * (w - horizontalIntersection) << endl;
+    else
+        cout << w * h << endl;
 }

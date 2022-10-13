@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 #define int long long int
 
-//#define USACO
+#define USACO
 
 using namespace std;
 
@@ -30,7 +30,47 @@ int32_t main() {
     cout.tie(0);
 
 #ifdef USACO
-    freopen("a.in", "r", stdin);
-    freopen("a.out", "w", stdout);
+    freopen("speeding.in", "r", stdin);
+    freopen("speeding.out", "w", stdout);
 #endif
+
+    int n, m;
+    cin >> n >> m;
+
+    vector<pair<int, int>> a(n), b(m);
+    for (int i = 0; i < n; i++)
+        cin >> a[i].first >> a[i].second;
+    for (int i = 0; i < m; i++)
+        cin >> b[i].first >> b[i].second;
+    
+    int mra = a[0].first, mrb = b[0].first;
+    int ia = 0, ib = 0;
+    int ret = 0;
+    while (true) {
+        ret = max(ret, b[ib].second - a[ia].second); 
+        int dis = min(mra, mrb);
+
+        mra -= dis;
+        mrb -= dis;
+
+        if (mra == 0)  {
+            if (ia == n - 1)
+                break;
+            else {
+                ia++;
+                mra = a[ia].first;
+            }
+        }
+
+        if (mrb == 0) {
+            if (ib == m - 1)
+                break;
+            else {
+                ib++;
+                mrb = b[ib].first;
+            }
+        }
+    }
+
+    cout << ret << endl;
 }

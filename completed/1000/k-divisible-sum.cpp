@@ -1,13 +1,14 @@
+//Category: 1000
+//Link: https://codeforces.com/contest/1476/problem/A
+//Complexity: O(1)
+//IDK why I solved a 1000
 #include <bits/stdc++.h>
 #define int long long int
-
-//#define USACO
 
 using namespace std;
 
 template<typename T> istream& operator>>(istream& in, vector<T>& a) {for(auto &x : a) in >> x; return in;};
 template<typename T> ostream& operator<<(ostream& out, vector<T>& a) {for(auto &x : a) out << x << ' '; return out;};
-template<typename K, typename V> ostream& operator<<(ostream& out, map<K, V>& a) {for(pair<K, V> p : a) out << p.first << " " << p.second << '\n'; return out;};
 
 //Credit: https://codeforces.com/blog/entry/62393
 struct custom_hash {
@@ -29,8 +30,12 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-#ifdef USACO
-    freopen("a.in", "r", stdin);
-    freopen("a.out", "w", stdout);
-#endif
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, k;
+        cin >> n >> k;
+        int a = (n + k - 1) / k;
+        cout << (k * a + n - 1) / n << endl;
+    }
 }
