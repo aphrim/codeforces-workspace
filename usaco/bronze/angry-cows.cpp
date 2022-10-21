@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 #define int long long int
 
-//#define USACO
+#define USACO
 
 using namespace std;
 
@@ -30,39 +30,43 @@ int32_t main() {
     cout.tie(0);
 
 #ifdef USACO
-    freopen("a.in", "r", stdin);
-    freopen("a.out", "w", stdout);
+    freopen("angry.in", "r", stdin);
+    freopen("angry.out", "w", stdout);
 #endif
 
-    int t;
-    cin >> t;
-    while (t--) {
-        int a, b, c, d;
-        cin >> a >> b >> c >> d;
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    cin >> a;
+    
+    sort(a.begin(), a.end());
 
-        int x, y;
-        int prod = a * b;
-        bool flag = false;
-
-        for (x = a + 1; x <= c; x++) {
-            int mult = 1;
-            while (true) {
-                int div = prod * mult / x;
-
-                if (div > b && div <= d && ((prod * mult) % x == 0)) {
-                    y = div;
-                    flag = true;
-                    break;
-                } 
-                if (div > d)
-                    break;
-                mult++;
+    int ret = 0;
+    for (int i = 0; i < a.size(); i++) {
+        int t = 1;
+        int l = i, r = i;
+        bool lB = false, rB = false;
+        while (true) {
+            int oldL = l, oldR = r;
+            if (!rB) {
+                for (int j = r; j < a.size(); j++) {
+                    if (abs(a[j] - a[oldR]) > t) break;
+                    else r = j;
+                }
             }
-            if (flag) break;
+            if (!lB) {
+                for (int j = l; j >= 0; j--) {
+                    if (abs(a[j] - a[oldL]) > t) break;
+                    else l = j;
+                }
+            }
+            if (l == oldL && r == oldR) break;
+            if (l == oldL) lB = true;
+            if (r == oldR) rB = true;
+            else t++;
         }
 
-        if (flag)
-            cout << x << " " << y << endl;
-        else cout << -1 << " " << -1 << endl;
+        ret = max(ret, r - l + 1);
     }
+    cout << ret << endl;
 }
