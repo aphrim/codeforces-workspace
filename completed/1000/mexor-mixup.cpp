@@ -24,6 +24,16 @@ struct custom_hash {
     }
 };
 
+int largeDiv(int a, int b) {
+    return (a + b - 1) / b;
+}
+
+bool isPrime(int x) {
+    for (int i = 2; i <= sqrt(x); i++)
+        if (x % i == 0) return false;
+    return true;
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
@@ -34,29 +44,20 @@ int32_t main() {
     freopen("a.out", "w", stdout);
 #endif
 
-    int n;
-    cin >> n;
-    int count = 0;
-    for (int i = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        count += x;
-    }
-
-    n++;
-
-    i (count == 0) {
-        int ret = 0;
-        for (int i = 1; i <= 5; i++) {
-            if ((i - 1) % n != 0) ret++;
-        }
-        cout << ret << endl;
-    } else {
-        count--;
-        int ret = 0;
-        for (int i = 1; i <= 5; i++) {
-            if ((count + i) % n != 0) ret++;
-        }
-        cout << ret << endl;
+    int t;
+    cin >> t;
+    while (t--) {
+        int a, b;
+        cin >> a >> b;
+        int cur = 0;
+        if (a % 4 == 1) cur = a - 1;
+        else if (a % 4 == 2) cur = 1;
+        else if (a % 4 == 3) cur = a;
+        if (cur == b) 
+            cout << a << endl;
+        else if ((cur ^ b) != a)
+            cout << 1 + a << endl;
+        else
+            cout << 2 + a << endl;
     }
 }

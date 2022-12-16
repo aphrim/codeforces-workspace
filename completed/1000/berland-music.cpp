@@ -24,6 +24,17 @@ struct custom_hash {
     }
 };
 
+int largeDiv(int a, int b) {
+    return (a + b - 1) / b;
+}
+
+bool isPrime(int x) {
+    if (x== 1) return false;
+    for (int i = 2; i <= sqrt(x); i++)
+        if (x % i == 0) return false;
+    return true;
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
@@ -34,29 +45,36 @@ int32_t main() {
     freopen("a.out", "w", stdout);
 #endif
 
-    int n;
-    cin >> n;
-    int count = 0;
-    for (int i = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        count += x;
-    }
-
-    n++;
-
-    i (count == 0) {
-        int ret = 0;
-        for (int i = 1; i <= 5; i++) {
-            if ((i - 1) % n != 0) ret++;
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        cin >> a;
+        vector<int> disliked, liked;
+        for (int i = 0; i < n; i++) {
+            char c;
+            cin >> c;
+            if (c == '1') liked.push_back(i);
+            else disliked.push_back(i);
         }
-        cout << ret << endl;
-    } else {
-        count--;
-        int ret = 0;
-        for (int i = 1; i <= 5; i++) {
-            if ((count + i) % n != 0) ret++;
+
+        sort(disliked.begin(), disliked.end(), [&](int x, int y) {
+            return a[x] > a[y];
+        });
+        sort(liked.begin(), liked.end(), [&](int x, int y) {
+            return a[x] < a[y];
+        });
+
+        int x = disliked.size();
+        for (int i = 0; i < disliked.size(); i++, x--) {
+            a[disliked[i]] = x; 
         }
-        cout << ret << endl;
+        x = disliked.size() + 1;
+        for (int i = 0; i < liked.size(); i++, x++) {
+            a[liked[i]] = x; 
+        }
+        cout << a << endl;
     }
 }

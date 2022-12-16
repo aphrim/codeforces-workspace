@@ -24,6 +24,16 @@ struct custom_hash {
     }
 };
 
+int largeDiv(int a, int b) {
+    return (a + b - 1) / b;
+}
+
+bool isPrime(int x) {
+    for (int i = 2; i <= sqrt(x); i++)
+        if (x % i == 0) return false;
+    return true;
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
@@ -34,29 +44,37 @@ int32_t main() {
     freopen("a.out", "w", stdout);
 #endif
 
-    int n;
-    cin >> n;
-    int count = 0;
-    for (int i = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        count += x;
-    }
+    int t;
+    cin >> t;
+    while (t--) {
+        string s;
+        int a;
 
-    n++;
+        cin >> s >> a;
 
-    i (count == 0) {
-        int ret = 0;
-        for (int i = 1; i <= 5; i++) {
-            if ((i - 1) % n != 0) ret++;
+        vector<pair<char, int>> pv;
+
+        for (char c : s) pv.push_back({c, pv.size()});
+        sort(pv.begin(), pv.end());
+
+        int i = 0, sum = 0;
+        for (; i < pv.size(); i++) {
+            sum += pv[i].first - 'a' + 1;
+            if (sum > a) break;
         }
-        cout << ret << endl;
-    } else {
-        count--;
-        int ret = 0;
-        for (int i = 1; i <= 5; i++) {
-            if ((count + i) % n != 0) ret++;
-        }
-        cout << ret << endl;
+
+        pv = vector<pair<char, int>>(pv.begin(), pv.begin() + i);
+        sort(pv.begin(), pv.end(), [](pair<char, int> a, pair<char, int> b){
+            return a.second < b.second;
+        });
+        for (pair<char, int> p : pv)
+            cout << p.first;
+        cout << endl;
+
+
+
+
+
+
     }
 }

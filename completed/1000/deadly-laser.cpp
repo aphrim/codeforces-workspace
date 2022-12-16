@@ -24,6 +24,17 @@ struct custom_hash {
     }
 };
 
+int largeDiv(int a, int b) {
+    return (a + b - 1) / b;
+}
+
+bool isPrime(int x) {
+    if (x== 1) return false;
+    for (int i = 2; i <= sqrt(x); i++)
+        if (x % i == 0) return false;
+    return true;
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
@@ -34,29 +45,22 @@ int32_t main() {
     freopen("a.out", "w", stdout);
 #endif
 
-    int n;
-    cin >> n;
-    int count = 0;
-    for (int i = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        count += x;
-    }
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, m, sx, sy, d;
+        cin >> n >> m >> sx >> sy >> d;
 
-    n++;
+        if (sx + sy - 2 <= d || (abs(n - sx) + abs(m - sy) <= d)) {
+            cout << -1 << endl;
+            continue;
+        }
 
-    i (count == 0) {
-        int ret = 0;
-        for (int i = 1; i <= 5; i++) {
-            if ((i - 1) % n != 0) ret++;
-        }
-        cout << ret << endl;
-    } else {
-        count--;
-        int ret = 0;
-        for (int i = 1; i <= 5; i++) {
-            if ((count + i) % n != 0) ret++;
-        }
-        cout << ret << endl;
+        bool ol = sx - 1 <= d, ob = sy - 1 <= d;
+        bool ou = m - sy <= d, ori = n - sx <= d;
+
+        if ((ol && ori) || (ob && ou) || (ob && ol) || (ori && ou)) cout << -1 << endl;
+        else cout << n + m - 2 << endl;
+
     }
 }

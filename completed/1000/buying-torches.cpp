@@ -34,29 +34,14 @@ int32_t main() {
     freopen("a.out", "w", stdout);
 #endif
 
-    int n;
-    cin >> n;
-    int count = 0;
-    for (int i = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        count += x;
-    }
 
-    n++;
-
-    i (count == 0) {
-        int ret = 0;
-        for (int i = 1; i <= 5; i++) {
-            if ((i - 1) % n != 0) ret++;
-        }
-        cout << ret << endl;
-    } else {
-        count--;
-        int ret = 0;
-        for (int i = 1; i <= 5; i++) {
-            if ((count + i) % n != 0) ret++;
-        }
-        cout << ret << endl;
+    int t;
+    cin >> t;
+    while (t--) {
+        int x, y, k;
+        cin >> x >> y >> k;
+        int sticks = k + y * k - 1; // 143
+        int moves = (sticks + x - 2) / (x - 1) + k;
+        cout << moves << endl;
     }
 }
