@@ -1,8 +1,3 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
 
@@ -38,10 +33,58 @@ bool isPrime(int x) {
     return true;
 }
 
+set<int> intersection(set<int> s1, set<int> s2) {
+    set<int> ret;
+    for (int x : s1)
+        if (s2.count(x))
+            ret.insert(x);
+    return ret;
+}
+
+set<int> factors(int x) {
+    set<int> ret;
+    for (int i = 1; i <= sqrt(x); i++) {
+        if (x % i == 0) {
+            ret.insert(i);
+            ret.insert(x / i);
+        }
+    }
+    return ret;
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+    int t;
+    cin >> t;
+    while (t--) {
+        set<int> commonDivisors;
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        cin >> a;
+
+        int i = 1;
+        while (i < n && a[i] == a[i - 1]) i++;
+        if (i < n)
+            commonDivisors = factors(abs(a[i] - a[i - 1]));
+        for (; i < n; i++) {
+            if (a[i] != a[i-1]) { 
+                commonDivisors = intersection(commonDivisors, factors(abs(a[i] - a[i-1])));
+            }
+        }
+
+        if (commonDivisors.count(0)) cout << -1 << endl;
+        else {
+            int ret = 0;
+            for (int x : commonDivisors) ret = max(ret, x);
+            if (ret == 0)
+                cout << -1 << endl;
+            else
+                cout << ret << endl;
+        }
+    }
 }
+

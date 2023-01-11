@@ -43,5 +43,33 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n, m;
+    cin >> n >> m;
+    vector<int> dif(n);
+    int baseSum = 0;
+
+    for (int i =0; i < n; i++) {
+        int a, b;
+        cin >> a >> b;
+        baseSum += a;
+        dif[i] = {b - a};
+    }
+
+    sort(dif.begin(), dif.end());
+
+    int i = 0;
+    while (baseSum > m) {
+        baseSum += dif[i++];
+        if (i == n) break;
+    }
+
+    if (baseSum > m)
+        cout << -1 << endl;
+    else
+        cout << i << endl;
+
+
+
     return 0;
 }
+

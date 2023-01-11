@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -43,5 +40,31 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int t;
+    cin >> t;
+    while (t--) {
+        string s;
+        cin >> s;
+
+        s = "R" + s;
+        int ret = 1;
+
+        int lastR = 0;
+
+        for (int i = 1; i < s.size(); i++) {
+            if (s[i] == 'R') {
+                ret = max(ret, i - lastR);
+                lastR = i;
+            }
+        }
+
+        ret = max(ret, static_cast<int>(s.size() - lastR));
+        cout << ret << endl;
+    }
 }
+

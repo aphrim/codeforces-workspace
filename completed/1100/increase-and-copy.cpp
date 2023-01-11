@@ -1,8 +1,3 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
 
@@ -43,5 +38,26 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+
+        if (n == 1) {
+            cout << 0 << endl;
+            continue;
+        }
+
+        int ret = INT_MAX;
+
+        for (int i = 1; i <= sqrt(n); i++) {
+            int add = largeDiv(n, i) - 1;
+            int mult = i - 1;
+            ret = min(ret, add + mult);
+        }
+
+        cout << ret << endl;
+    }
 }
+

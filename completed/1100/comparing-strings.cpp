@@ -43,5 +43,26 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    string a, b;
+    cin >> a >> b;
+    if (a.size() != b.size()) cout << "NO" << endl;
+    else {
+        int i1 = -1, i2 = -1;
+        bool flag = true;
+        for (int i = 0; i < a.size(); i++) {
+            if (a[i] != b[i])  {
+                if (i1 == -1) i1 = i;
+                else if (i2 == -1) i2 = i;
+                else { flag = false; break; }
+            }
+        }
+        if (a[i1] != b[i2] || a[i2] != b[i1]) flag = false;
+        if (flag)
+            cout << "YES" << endl;
+        else
+            cout << "NO" << endl;
+    }
+
     return 0;
 }
+

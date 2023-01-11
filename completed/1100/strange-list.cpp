@@ -1,8 +1,3 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
 
@@ -43,5 +38,33 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, x;
+        cin >> n >> x;
+        vector<int> a(n);
+        vector<pair<int, int>> b;
+        cin >> a;
+        int sum = 0;
+        bool f;
+        for (int y : a) {
+            f = false;
+            if (y % x == 0) b.push_back({y / x, x});
+            else break;
+            f = true;
+        }
+
+        if (f)
+            for (int i = 0; i < b.size(); i++) {
+                if (b[i].first % x == 0) b.push_back({b[i].first/x, b[i].second * x});
+                else break;
+            }
+        for (int y : a)
+            sum += y;
+        for (pair<int, int> p : b)
+            sum += p.first * p.second;
+        cout << sum << endl;
+    }
 }
+

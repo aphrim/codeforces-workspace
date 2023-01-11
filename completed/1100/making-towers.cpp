@@ -43,5 +43,33 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        map<int, vector<int>> p;
+        for (int i = 0; i < n; i++) {
+            int x;
+            cin >> x;
+            p[x].push_back(i + 1);
+        }
+
+        for (int i = 1; i <= n; i++) {
+            int ret = 0, last = -1;
+            //go up by multiples of two
+            for (int pos : p[i]) {
+                if (last == -1 || ((pos - last - 1) % 2 == 0)) {
+                    ret++;
+                    last = pos;
+                }
+            }
+            cout << ret << " ";
+        }
+        cout << endl;
+
+    }
+
     return 0;
 }
+

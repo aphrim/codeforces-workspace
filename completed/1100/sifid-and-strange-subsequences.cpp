@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
-#define int long long int
+//#define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -38,10 +35,50 @@ bool isPrime(int x) {
     return true;
 }
 
+int sol(vector<int> a) {
+    int ret = 1;
+    int diff = a.back();
+    int last = a.back();
+    for (int i = a.size() - 2; i >= 0; i--) {
+        if (abs(a[i] - last) >= diff) ret++, last = a[i];
+    }
+    return ret;
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> in(n);
+        cin >> in;
+        sort(in.begin(), in.end());
+        vector<int> a;
+        for (int x : in) {
+            a.push_back(x);
+            if (x > 0) break;
+        }
+
+        int ret = sol(a);
+        if (a.size() > 1) {
+            a.pop_back();
+            ret = max(ret, sol(a));
+        }
+        if (a.size() > 1) {
+            a.pop_back();
+            ret = max(ret, sol(a));
+        }
+        cout << ret << endl;
+    }
 }
+

@@ -43,5 +43,40 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        cin >> a;
+        sort(a.begin(), a.end());
+
+        vector<int> b(n);
+        if (n % 2 == 0) {
+            int i = n - 1, j = n / 2 - 1;
+            for (int k = 0; k < n; k++) {
+                if (k % 2 == 0)
+                    b[k] = a[i--];
+                else b[k] = a[j--];
+            }
+            bool flag = true;
+            for (i = 1; i < n - 1; i++) {
+                flag = flag && ((b[i] < b[i-1] && b[i] < b[i+1]) || (b[i] > b[i-1] || b[i] > b[i+1]));
+            }
+            flag = flag && ((b.back() < b[n - 2] && b.back() < b[0]) || (b.back() > b[n-2] && b.back() > b[0]));
+            flag = flag && ((b[0] < b.back() && b[0] < b[1]) || (b[0] > b.back() && b[0] > b[1]));
+            if (flag)
+                cout << "YES" << endl << b << endl;
+            else cout << "NO" << endl;
+        } else {
+            cout << "NO" << endl;
+        }
+
+
+
+    }
+
     return 0;
 }
+

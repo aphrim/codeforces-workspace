@@ -38,10 +38,30 @@ bool isPrime(int x) {
     return true;
 }
 
+int f(int x) {
+    x++;
+    while (x % 10 == 0) x/= 10;
+    return x;
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
+    int n;
+    set<int> seen;
+    cin >> n;
+    seen.insert(n);
+    int ret = 0;
+    while (true) {
+        n = f(n);
+        if (seen.count(n)) break;
+        else seen.insert(n);
+        ret++;
+    }
+    cout << ret + 1 << endl;
+
     return 0;
 }
+

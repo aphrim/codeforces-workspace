@@ -1,8 +1,3 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
 
@@ -43,5 +38,23 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        string s;
+        cin >> n >> s;
+
+        string r;
+        r.push_back(s[0]);
+        bool b = false;
+        for (int i = 1; i < n; i++) {
+            if (s[i] < s[i-1] || (b && s[i] == s[i-1])) { r.push_back(s[i]); b = true; }
+            else break;
+        }
+        cout << r;
+        reverse(r.begin(), r.end());
+        cout << r << endl;
+    }
 }
+

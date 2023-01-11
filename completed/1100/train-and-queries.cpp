@@ -1,8 +1,3 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
 
@@ -43,5 +38,32 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+    int t;
+    cin >> t;
+    while (t--) {
+        set<int> enc;
+        map<int, int> first, last;
+
+        int n, k;
+        cin >> n >> k;
+        for (int i = 0; i < n; i++) {
+            int x;
+            cin >> x;
+            if (enc.count(x)) last[x] = i;
+            else {
+                first[x] = i, last[x] = i;
+                enc.insert(x);
+            }
+        }
+
+        for (int i = 0; i < k; i++) {
+            int aj, bj;
+            cin >> aj >> bj;
+
+            if (enc.count(aj) && enc.count(bj) && first[aj] < last[bj]) cout << "YES" << endl;
+            else cout << "NO" << endl;
+        }
+    }
+
 }
+

@@ -43,5 +43,38 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    freopen("hps.in", "r", stdin);
+    freopen("hps.out", "w", stdout);
+
+    int n;
+    cin >> n;
+    vector<char> in(n);
+    cin >> in;
+
+    // P == 0, H = 1, S = 2
+    vector<vector<int>> prefix(3, vector<int>(n + 1)), suffix(3, vector<int>(n + 2));
+    for (int i = 1; i <= n; i++) {
+        prefix[0][i] = prefix[0][i - 1] + (in[i - 1] ==  'P');
+        prefix[1][i] = prefix[1][i - 1] + (in[i - 1] ==  'H');
+        prefix[2][i] = prefix[2][i - 1] + (in[i - 1] ==  'S');
+    }
+    for (int i = n; i >= 1; i--) {
+        suffix[0][i] = suffix[0][i + 1] + (in[i - 1] ==  'P');
+        suffix[1][i] = suffix[1][i + 1] + (in[i - 1] ==  'H');
+        suffix[2][i] = suffix[2][i + 1] + (in[i - 1] ==  'S');
+    }
+
+    int ret = 0;
+    for (int i = 1; i <= n; i++) {
+        ret = max(ret, (
+            max(prefix[0][i], max(prefix[1][i], prefix[2][i])) +
+            max(suffix[0][i], max(suffix[1][i], suffix[2][i])))
+        );
+    }
+    if (ret > n) ret = n;
+
+    cout << ret << endl;
+
     return 0;
 }
+

@@ -1,6 +1,6 @@
 /*
 ID: gregper1
-TASK: 
+TASK: gift1 
 LANG: C++
  */
 #include <bits/stdc++.h>
@@ -43,5 +43,38 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    freopen("gift1.in", "r", stdin);
+    freopen("gift1.out", "w", stdout);
+
+    int n;
+    cin >> n;
+    vector<string> names (n);
+    map<string, int> m;
+    map<string, int> initial;
+    cin >> names;
+
+    for (int i = 0; i < n; i++) {
+        string gname;
+        int money, g;
+        cin >> gname >> money >> g;
+
+        if (g == 0) continue;
+
+        initial[gname] = money;
+        m[gname] += money % g;
+        for (int j = 0; j < g; j++) {
+            string name;
+            cin >> name;
+            m[name] += money / g;
+        }
+    }
+
+    for (string name : names) {
+        cout << name << " " << m[name] - initial[name] << endl;
+    }
+
+
+
     return 0;
 }
+

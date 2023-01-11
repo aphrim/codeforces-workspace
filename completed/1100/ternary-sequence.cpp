@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -43,5 +40,34 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int t;
+    cin >> t;
+    while (t--) {
+        int x1, y1, z1, x2, y2, z2;
+        cin >> x1 >> y1 >> z1 >> x2 >> y2 >> z2;
+
+        int sum = 0;
+        int miz1y2 = min(z1, y2);
+        sum += miz1y2 * 2;
+        z1 -= miz1y2, y2 -= miz1y2;
+
+        int mi = min(z1, z2);
+        z1 -= mi, z2 -= mi;
+
+        mi = min(x1, z2);
+        z2 -= mi, x1 -= mi;
+
+        mi = min(y1, z2);
+        sum -= mi * 2;
+        y1 -= mi, z2 -= mi;
+
+        cout << sum << endl;
+
+    }
 }
+

@@ -43,5 +43,36 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    freopen("div7.in", "r", stdin);
+    freopen("div7.out", "w", stdout);
+
+    int n;
+    cin >> n;
+
+    map<int, int> minMod, maxMod;
+    for (int i = 0; i < 7; i++) minMod[i] = INT_MAX;
+    for (int i = 0; i < 7; i++) maxMod[i] = 0;
+
+    minMod[0] = 0;
+    int cur = 0;
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        cur += x;
+        int mod = cur % 7;
+        minMod[mod] = min(minMod[mod], i + 1);
+        maxMod[mod] = max(maxMod[mod], i + 1);
+    }
+
+
+    int ret = maxMod[0] - minMod[0];
+    for (int i = 1; i < 7; i++) {
+        ret = max(ret, maxMod[i] - minMod[i]);
+        ret = max(ret, maxMod[i] - minMod[i]);
+    }
+    cout << ret << endl;
+
+
     return 0;
 }
+

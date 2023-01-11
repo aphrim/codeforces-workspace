@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -43,5 +40,33 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int n;
+    cin >> n;
+
+    int change25 = 0, change50 = 0;
+
+    bool flag = true;
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        if (x == 25) change25++;
+        else if (x == 50) {
+            if (change25 > 0) change25--, change50++;
+            else flag = false;
+        } else {
+            if (change25 > 0 && change50 > 0) change25--, change50--;
+            else if (change25 > 2) change25 -= 3;
+            else flag = false;
+        }
+        if (!flag) break;
+    }
+
+    if (flag) cout << "YES" << endl;
+    else cout << "NO" << endl;
 }
+

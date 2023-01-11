@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -43,5 +40,26 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int t;
+    cin >> t;
+    while (t--) {
+        int a, b, c;
+        cin >> a >> b >> c;
+
+        int g = pow(10, c) - 1;
+
+        int aa = floor((pow(10, a - 1) / g + 1)) * g;
+
+        int bb = floor((pow(10, b - 1) / g + 1)) * g;
+        while (__gcd(aa, bb) != g) {
+            bb += g;
+        }
+        cout << aa << " " << bb << endl;
+    }
 }
+

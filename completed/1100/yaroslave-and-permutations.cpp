@@ -1,8 +1,3 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
 
@@ -43,5 +38,20 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+    int n;
+    cin >> n;
+    map<int, int> counts;
+    int maxCount = 0;
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        counts[x]++;
+        maxCount = max(maxCount, counts[x]);
+    }
+
+    if (maxCount > largeDiv(n, 2)) cout << "NO" << endl;
+    else cout << "YES" << endl;
+
+
 }
+

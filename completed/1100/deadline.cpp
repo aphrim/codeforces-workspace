@@ -1,8 +1,3 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
 
@@ -43,5 +38,24 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, d;
+        cin >> n >> d;
+
+        int x = 1;
+        int last = d;
+        while (true) {
+            int cur = (d + x) / (x + 1) + x;
+            x++;
+            if (x > sqrt(d)) break;
+            last = cur;
+        }
+        if (last <= n) 
+            cout << "YES" << endl;
+        else cout << "NO" << endl;
+    }
 }
+

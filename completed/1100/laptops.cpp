@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -43,5 +40,27 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int n;
+    cin >> n;
+    vector<pair<int, int>> a(n);
+    for (int i = 0; i < n; i++) cin >> a[i].first >> a[i].second;
+
+    sort(a.begin(), a.end(), [](pair<int, int> p1, pair<int, int> p2) {
+            return p1.first > p2.first;
+    });
+
+    int minQuality  = a[0].second;
+    bool flag = false;
+    for (int i = 1; i < n; i++) {
+        if (a[i].second > minQuality) flag = true;
+        else minQuality = a[i].second;
+    }
+    if (flag) cout << "Happy Alex" << endl;
+    else cout << "Poor Alex" << endl;
 }
+

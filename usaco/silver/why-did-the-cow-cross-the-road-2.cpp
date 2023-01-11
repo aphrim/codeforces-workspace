@@ -43,5 +43,29 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    freopen("maxcross.in", "r", stdin);
+    freopen("maxcross.out", "w", stdout);
+
+    int n, k, b;
+    cin >> n >> k >> b;
+
+    vector<int> broken(b);
+    cin >> broken;
+
+    sort(broken.begin(), broken.end());
+
+    int ret = INT_MAX;
+    vector<int> prefix(n + 1);
+    int j = 0;
+    for (int i = 1; i <= n; i++) {
+        int cur = 0;
+        if (j < n && broken[j] == i) j++, cur = 1;
+        prefix[i] = prefix[i-1] + cur;
+        if (i >= k) ret = min(ret, prefix[i] - prefix[i - k]);
+    }
+    cout << ret << endl;
+
+
     return 0;
 }
+

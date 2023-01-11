@@ -1,8 +1,3 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
 
@@ -43,5 +38,28 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> d(n);
+        cin >> d;
+
+        bool flag = true;
+        vector<int> a(n);
+        a[0] = d[0];
+
+        for (int i = 1; i < n; i++) {
+            if (d[i] <= a[i-1] && d[i] != 0) {
+                flag = false;
+                break;
+            } else a[i] = a[i-1] + d[i];
+        }
+        if (flag)
+            cout << a << endl;
+        else 
+            cout << -1 << endl;
+    }
 }
+

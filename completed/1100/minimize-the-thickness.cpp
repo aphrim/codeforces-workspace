@@ -43,5 +43,34 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        int minThick = n;
+        vector<int> a(n);
+        cin >> a;
+
+        int segSum = 0;
+        for (int i = 0; i < n - 1; i++) {
+            segSum += a[i];
+            int maxWidth = i + 1, curWidth = 0, curSum = 0;
+            bool flag = true;
+            for (int j = i + 1; j < n; j++) {
+                curWidth++;
+                curSum += a[j];
+                if (curSum > segSum) {flag = false; break;}
+                if (curSum == segSum) maxWidth = max(maxWidth, curWidth), curWidth = 0, curSum = 0;
+            }
+            if (curSum != 0) flag = false;
+            if (flag) {
+                minThick = min(minThick, maxWidth);
+            }
+        }
+        cout << minThick << endl;
+    }
+
     return 0;
 }
+

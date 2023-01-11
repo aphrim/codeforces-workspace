@@ -43,5 +43,20 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        cin >> a;
+        int ans = pow(2, 31) - 1;
+        for (int i = 0; i < n; i++) {
+            if (a[i] != i) ans &= i;
+        }
+        cout << ans << endl;
+    }
+
     return 0;
 }
+
