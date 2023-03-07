@@ -43,5 +43,39 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    cin >> a;
+    sort(a.begin(), a.end());
+    int sum = 0;
+    for (int x : a) sum += x;
+
+    int m;
+    cin >> m;
+    for (int i = 0; i < m; i++) {
+        int x, y;
+        cin >> x >> y;
+        int s = sum, s2 = sum;
+        auto it = lower_bound(a.begin(), a.end(), x);
+        int coins = 0, coins2 = 0;
+        if (it != a.end()) {
+            if (it > a.begin()) {
+                s2 -= *(it - 1);
+                coins2 += x - *(it - 1);
+            } else s2 -= *it;
+            s -= *it;
+        } else {
+            s -= a.back();
+            s2 -= a.back();
+            coins += x - a.back();
+            coins2 += x - a.back();
+        }
+        coins += max(0ll, y - s);
+        coins2 += max(0ll, y - s2);
+        cout << min(coins, coins2) << endl;
+    }
+
     return 0;
 }
+

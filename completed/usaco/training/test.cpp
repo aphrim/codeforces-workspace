@@ -1,6 +1,6 @@
 /*
 ID: gregper1
-TASK: 
+TASK: test
 LANG: C++
  */
 #include <bits/stdc++.h>
@@ -43,5 +43,13 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    freopen("test.in", "r", stdin);
+    freopen("test.out", "w", stdout);
+
+    int a, b;
+    cin >> a >> b;
+    cout << a + b << endl;
+
     return 0;
 }
+

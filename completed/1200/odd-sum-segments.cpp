@@ -43,5 +43,37 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int q;
+    cin >> q;
+    while (q--) {
+        int n, k;
+        cin >> n >> k;
+
+        vector<int> a(n);
+        cin >> a;
+        int oddCount = 0;
+        for (int x : a) oddCount += x % 2;
+        if (oddCount == 0) cout << "NO" << endl;
+        else {
+            int curCount = 0;
+            vector<int> v;
+            int kk = k;
+            for (int i = 0; i < n; i++) {
+                if (a[i] % 2) {
+                    curCount++;
+                    if (curCount % 2 == 1 && kk > 1) v.push_back(i + 1), curCount = 0, kk--;
+                }
+            }
+            if (curCount % 2 == 1) v.push_back(n);
+            if (v.size() !=  k) {
+                cout << "NO" << endl;
+                continue;
+            }
+            cout << "YES" << endl;
+            cout << v << endl;
+        }
+    }
+
     return 0;
 }
+

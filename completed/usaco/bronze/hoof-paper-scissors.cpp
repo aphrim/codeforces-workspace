@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+#define USACO
 
 using namespace std;
 
@@ -43,5 +40,37 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("hps.in", "r", stdin);
+    freopen("hps.out", "w", stdout);
+#endif
+
+    int n;
+    cin >> n;
+    vector<pair<int, int>> vp(n);
+    for (int i = 0; i < n; i++) cin >> vp[i].first >> vp[i].second;
+
+    map<char, char> m;
+    m['h'] = 's';
+    m['s'] = 'p';
+    m['p'] = 'h';
+
+    int ret = 0;
+    for (int s = 1; s <= 3; s++) {
+        for (int h = 1; h <= 3; h++) {
+            for (int p = 1; p <= 3; p++) {
+                if (h != s && h != p && p != s) {
+                    map<int, char> cmap;
+                    cmap[s] = 's', cmap[h] = 'h', cmap[p] = 'p';
+                    int cur = 0;
+                    for (int i = 0; i < n; i++) {
+                        if (cmap[vp[i].second] == m[cmap[vp[i].first]]) cur++;
+                    }
+                    ret = max(cur, ret);
+                }
+            }
+        }
+    }
+    cout << ret << endl;
 }
+

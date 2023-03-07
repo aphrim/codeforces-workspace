@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -27,21 +24,40 @@ struct custom_hash {
     }
 };
 
-int largeDiv(int a, int b) {
-    return (a + b - 1) / b;
-}
-
-bool isPrime(int x) {
-    if (x== 1) return false;
-    for (int i = 2; i <= sqrt(x); i++)
-        if (x % i == 0) return false;
-    return true;
-}
-
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int whiteLead = 0;
+
+    map<char, int> table;
+    table['q'] = 9;
+    table['r'] = 5;
+    table['b'] = 3;
+    table['n'] = 3;
+    table['p'] = 1;
+    table['k'] = 0;
+
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            char c;
+            cin >> c;
+            if (c == '.') continue;
+            bool white = c < 'a';
+            int points = table[white ? c - 'A' + 'a' : c];
+            if (white) whiteLead += points;
+            else whiteLead -= points;
+        }
+    }
+    if (whiteLead > 0)
+        cout << "White" << endl;
+    else if (whiteLead == 0)
+        cout << "Draw" << endl;
+    else cout << "Black" << endl;
 }

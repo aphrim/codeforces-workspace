@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -27,15 +24,19 @@ struct custom_hash {
     }
 };
 
-int largeDiv(int a, int b) {
-    return (a + b - 1) / b;
+int n, m;
+
+int dis(pair<int, int> a, pair<int, int> b) {
+    return abs(a.first - b.first) + abs(a.second - b.second);
 }
 
-bool isPrime(int x) {
-    if (x== 1) return false;
-    for (int i = 2; i <= sqrt(x); i++)
-        if (x % i == 0) return false;
-    return true;
+pair<int, int> furthestCorner(pair<int, int> cords) {
+    int c1 = dis({1, 1}, cords), c2 = dis({n, 1}, cords), c3 = dis({1, m}, cords), c4 = dis({n, m}, cords);    
+    int ma = max(c1, max(c2, max(c3, c4)));
+    if (c1 == ma) return {1, 1};
+    else if (c2 == ma) return {n, 1};
+    else if (c3 == ma) return {1, m};
+    else return {n, m};
 }
 
 int32_t main() {
@@ -43,5 +44,21 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int t;
+    cin >> t;
+    while (t--) {
+        int i, j;
+        cin >> n >> m >> i >> j;
+        i--, j--;
+        
+        pair<int, int> p1 = furthestCorner({i, j});
+        pair<int, int> p2 = furthestCorner(p1);
+
+        cout << p1.first << " " << p1.second << " " << p2.first << " " << p2.second << endl;
+    }
 }

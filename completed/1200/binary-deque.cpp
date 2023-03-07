@@ -43,5 +43,44 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, s;
+        cin >> n >> s;
+
+        int curSum = 0, i = 0;
+        vector<int> a(n);
+        cin >> a;
+        for (; i < n; i++) {
+            curSum += a[i];
+            if (curSum == s) break;
+        }
+        if (curSum < s) {
+            cout << -1 << endl;
+            continue;
+        }
+
+        int ret = i + 1, j = 0;
+        while (true) {
+            if (curSum < s) {
+                i++;
+                if (i == n) break;
+                curSum += a[i];
+            } else if (curSum > s) {
+                curSum -= a[j];
+                j++;
+            } else {
+                ret = max(ret, i - j + 1);
+                i++;
+                if (i == n) break;
+                curSum += a[i];
+            }
+        }
+        cout << n - ret << endl;
+
+    }
+
     return 0;
 }
+

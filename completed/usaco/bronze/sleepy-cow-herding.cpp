@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+#define USACO
 
 using namespace std;
 
@@ -27,15 +24,15 @@ struct custom_hash {
     }
 };
 
-int largeDiv(int a, int b) {
-    return (a + b - 1) / b;
+int calcMin(int x,int y,int z) {
+    if (x == z - 2) return 0;
+    if (y - x == 2 || z - y == 2)
+        return 1;
+    return 2;
 }
 
-bool isPrime(int x) {
-    if (x== 1) return false;
-    for (int i = 2; i <= sqrt(x); i++)
-        if (x % i == 0) return false;
-    return true;
+int calcMax(int x, int y, int z) {
+    return max(z - y - 1, y - x - 1);
 }
 
 int32_t main() {
@@ -43,5 +40,29 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("herding.in", "r", stdin);
+    freopen("herding.out", "w", stdout);
+#endif
+
+    int x, y, z;
+    cin >> x >> y >> z;
+
+    if (x > y) {
+        int t = x;
+        x = y;
+        y = t;
+    }
+    if (x > z) {
+        int t = x;
+        x = z;
+        z = t;
+    }
+    if (y > z) {
+        int t = y;
+        y = z;
+        z = t;
+    }
+
+    cout << calcMin(x, y, z) << endl << calcMax(x, y, z) << endl;
 }

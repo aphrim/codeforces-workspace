@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -27,21 +24,44 @@ struct custom_hash {
     }
 };
 
-int largeDiv(int a, int b) {
-    return (a + b - 1) / b;
-}
-
-bool isPrime(int x) {
-    if (x== 1) return false;
-    for (int i = 2; i <= sqrt(x); i++)
-        if (x % i == 0) return false;
-    return true;
-}
-
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int n;
+    cin >> n;
+    int oddCount = 0, evenCount = 0;
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        if (x % 2 == 0) evenCount++;
+        else oddCount++;
+    }
+
+    int i = 0;
+    for (;; i++) {
+        if (i % 2 == 0) {
+            if (evenCount > 0)
+                evenCount--;
+            else if (oddCount > 1)
+                oddCount -= 2;
+            else
+                break;
+        } else {
+            if (oddCount > 0)
+                oddCount--;
+            else break;
+        }
+    }
+
+    if (oddCount == 1)
+        i--;
+
+    cout << i << endl;
 }

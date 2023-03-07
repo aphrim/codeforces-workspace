@@ -1,6 +1,6 @@
 /*
 ID: gregper1
-TASK: 
+TASK: ride
 LANG: C++
  */
 #include <bits/stdc++.h>
@@ -42,6 +42,18 @@ int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
+    freopen("ride.in", "r", stdin);
+    freopen("ride.out", "w", stdout);
+
+    string a, b;
+    cin >> a >> b;
+
+    int ma = 1, mb = 1;
+    for (char c : a) ma *= c - 'A' + 1;
+    for (char c : b) mb *= c - 'A' + 1;
+
+    if (ma % 47 == mb % 47) cout << "GO" << endl;
+    else cout << "STAY" << endl;
 
     return 0;
 }

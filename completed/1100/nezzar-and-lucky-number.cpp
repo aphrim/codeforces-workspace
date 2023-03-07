@@ -1,8 +1,3 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
 
@@ -38,10 +33,44 @@ bool isPrime(int x) {
     return true;
 }
 
+bool isLucky(int x, int d) {
+    while (x > 0) {
+        if (x % 10 == d) return true;
+        x /= 10;
+    }
+    return false;
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+    int t;
+    cin >> t;
+    while (t--) {
+        int q, d;
+        cin >> q >> d;
+
+        while (q--) {
+            int x;
+            cin >> x;
+
+            vector<int> bc(5);
+
+            bool flag = false;
+            if (x >= (d * 10 + 9)) flag = true;
+            else while (x >= d) {
+                flag = flag || isLucky(x, d);
+                x -= d;
+            }
+
+            if (x == 0) flag = true;
+            if (flag) cout << "YES" << endl;
+            else cout << "NO" << endl;
+
+
+        }
+    }
 }
+

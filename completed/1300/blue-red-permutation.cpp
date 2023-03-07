@@ -43,5 +43,39 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> blueVals, redVals;
+        vector<int> a(n);
+        cin >> a;
+        for (int i = 0; i < n; i++) {
+            char c;
+            cin >> c;
+            if (c == 'B') blueVals.push_back(a[i]);
+            else redVals.push_back(a[i]);
+        }
+
+        sort(blueVals.begin(), blueVals.end());
+        sort(redVals.begin(), redVals.end(), [](int x, int y) { return x > y; });
+        int cur = 1;
+        bool flag = true;
+        for (int i = 0; i < blueVals.size(); i++) {
+            if (blueVals[i] < cur) flag = false;
+            cur++;
+        }
+        cur = n;
+        for (int i = 0; i < redVals.size(); i++) {
+            if (redVals[i] > cur) flag = false;
+            cur--;
+        }
+
+        if (flag) cout << "YES" << endl;
+        else cout << "NO" << endl;
+    }
+
     return 0;
 }
+

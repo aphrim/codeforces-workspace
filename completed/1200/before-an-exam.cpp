@@ -43,5 +43,27 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int d, sum;
+    cin >> d >> sum;
+    vector<pair<int, int>> days(d);
+    int mi = 0, ma = 0;
+    for (int i = 0; i < d; i++) cin >> days[i].first >> days[i].second;
+    for (int i = 0; i < d; i++) mi += days[i].first, ma += days[i].second;
+    if (mi > sum || ma < sum) cout << "NO" << endl;
+    else {
+        vector<int> ret(d);
+        int curSum = ma;
+        for (int i = 0; i < d; i++) ret[i] = days[i].second;
+        for (int i = 0; i < d; i++) {
+            int sub = min(curSum - sum, days[i].second - days[i].first);
+            curSum -= sub;
+            ret[i] -= sub;
+        }
+        cout << "YES\n" << ret << endl;
+    }
+
+
+
     return 0;
 }
+

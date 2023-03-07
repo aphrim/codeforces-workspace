@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -27,7 +24,7 @@ struct custom_hash {
     }
 };
 
-int largeDiv(int a, int b) {
+int roundUpDiv(int a, int b) {
     return (a + b - 1) / b;
 }
 
@@ -43,5 +40,28 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+
+        int evenCount = 0, oddCount = 0;
+        bool adj = false;
+        vector<int> a(n);
+        cin >> a;
+        sort(a.begin(), a.end());
+        for (int i = 0; i < n; i++) evenCount += !(a[i] % 2), oddCount += a[i] % 2, adj = adj || (i > 0 && a[i-1] == a[i] - 1);
+
+        if (n % 2 == 1) cout << "NO" << endl;
+        else if (evenCount % 2 == 0 && oddCount % 2 == 0) cout << "YES" << endl;
+        else if (adj) cout << "YES" << endl; 
+        else cout << "NO" << endl;
+    }
 }
+

@@ -38,10 +38,59 @@ bool isPrime(int x) {
     return true;
 }
 
+vector<int> sol1(int n, vector<int> a) {
+    int sum = a.back();
+    a.erase(a.begin() + n - 1);
+    int actSum = 0;
+    for (int x : a) actSum += x;
+    int diff = actSum - sum;
+    int ind = -1;
+    for (int i = 0; i < n - 1; i++) {
+        if (a[i] == diff) ind = i;
+    }
+    if (ind == -1) return {};
+    a.erase(a.begin() + ind);
+    return a;
+}
+
+vector<int> sol2(int n, vector<int> a) {
+    int sum = a[n - 2];
+    a.erase(a.begin() + n - 2);
+    int actSum = 0;
+    for (int x : a) actSum += x;
+    int diff = actSum - sum;
+    int ind = -1;
+    for (int i = 0; i < n - 1; i++) {
+        if (a[i] == diff) ind = i;
+    }
+    if (ind == -1) return {};
+    a.erase(a.begin() + ind);
+    return a;
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n + 2);
+        cin >> a;
+        sort(a.begin(), a.end());
+        vector<int> res = sol1(n + 2, a);
+        if (res.size() == 0)
+            res = sol2(n + 2, a);
+        if (res.size() == 0) 
+            cout << -1 << endl;
+        else
+            cout << res << endl;
+        
+    }
+
     return 0;
 }
+

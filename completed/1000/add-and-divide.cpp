@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -43,5 +40,25 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int t;
+    cin >> t;
+    while (t--) {
+        int ret = INT_MAX;
+        int a, b;
+        cin >> a >> b;
+        for (int mb = 0; mb <= 50; mb++) {
+            int aa = a;
+            for (int ma = 0; ma <= 50; ma++) {
+                if (aa == 0) ret = min(ret, ma + mb);
+                aa /= b; 
+            }
+            b++;
+        }
+        cout << ret << endl;
+    }
 }

@@ -43,5 +43,29 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n, m;
+    cin >> n >> m;
+    multiset<int> h;
+    vector<int> t(m);
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        h.insert(x);
+    }
+    cin >> t;
+
+
+    for (int i = 0; i < m; i++) {
+        auto ind = h.upper_bound(t[i]);
+        if (ind == h.begin()) 
+            cout << -1 << endl;
+        else {
+            ind--;
+            cout << *ind << endl;
+            h.erase(ind);
+        }
+    }
+
     return 0;
 }
+

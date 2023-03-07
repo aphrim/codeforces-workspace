@@ -43,5 +43,30 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, x;
+        cin >> n >> x;
+
+        vector<int> a(n);
+        cin >> a;
+        vector<int> sorted = a;
+        sort(sorted.begin(), sorted.end());
+
+        if (a == sorted) cout << "YES" << endl;
+        else {
+            int largestPossible = n;
+            for (int i = 0; i < n; i++) {
+                if (a[i] != sorted[i]) {
+                    largestPossible = min(largestPossible, max(i, n - i - 1));
+                }
+            }
+            if (largestPossible >= x) cout << "YES" << endl;
+            else cout << "NO" << endl;
+        }
+    }
+
     return 0;
 }
+

@@ -43,5 +43,23 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    //Odd, minus 1, divide by 2
+    //Even, minus 2, divide by 2
+
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, k;
+        cin >> n >> k;
+
+        if (n % 4 == 0) 
+            cout << n / 4 << " " << n / 4 << " " << n / 2 << endl;
+        else if (n % 2 == 0)
+            cout << 2 << " " << n / 2 - 1 << " " << n / 2 - 1 << endl;
+        else
+            cout << 1 << " " << n / 2 << " " << n / 2 << endl;
+    }
+
     return 0;
 }
+

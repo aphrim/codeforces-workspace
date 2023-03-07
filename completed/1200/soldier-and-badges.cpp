@@ -43,5 +43,24 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n;
+    cin >> n;
+
+    map<int, int> counts;
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        counts[x]++;
+    }
+
+    int ret = 0;
+    for (int i = 1;; i++) {
+        ret += max(0ll, counts[i] - 1);
+        counts[i + 1] += max(0ll, counts[i] - 1);
+        if (i > n && counts[i] == 0) break;
+    }
+    cout << ret << endl;
+
     return 0;
 }
+

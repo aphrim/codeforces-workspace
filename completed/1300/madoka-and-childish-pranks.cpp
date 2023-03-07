@@ -43,5 +43,36 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        map<char, int> s, t, p;
+        string ss, st, sp;
+        cin >> ss;
+        for (char c : ss) s[c]++;
+        cin >> st;
+        for (char c : st) t[c]++;
+        cin >> sp;
+        for (char c : sp) p[c]++;
+
+        bool flag = true;
+        for (pair<char, int> pii : t) {
+            int diff = pii.second - s[pii.first];
+            if (diff < 0 || diff > p[pii.first]) flag = false;
+        }
+
+        int i = 0, j = 0;
+        for (; i < ss.size(); i++) {
+            while (j < st.size() && st[j] != ss[i]) j++;
+            if (j == st.size()) flag = false;
+            j++;
+        }
+        if (flag) cout << "YES" << endl;
+        else cout << "NO" << endl;
+    }
+
+
+
     return 0;
 }
+

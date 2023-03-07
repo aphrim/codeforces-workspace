@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -43,5 +40,43 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    //More than one of each shoe size? Swap between things with same shoe size.
+    
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+
+        map<int, vector<int>> sizes;
+        for (int i = 0; i < n; i++) {
+            int x;
+            cin >> x;
+            sizes[x].push_back(i);
+        }
+
+        bool flag = true;
+        for (pair<int, vector<int>> p : sizes) flag = flag && p.second.size() > 1;
+
+        if (!flag) {
+            cout << -1 << endl;
+            continue;
+        }
+
+        vector<int> ans(n);
+
+        for (pair<int, vector<int>> p : sizes) {
+            vector<int> v = p.second;
+            for (int i = 1; i < v.size(); i++) ans[v[i]] = v[i - 1] + 1;
+            ans[v[0]] = v.back() + 1;
+        }
+
+        cout << ans << endl;
+
+    }
 }

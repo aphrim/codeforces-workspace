@@ -43,5 +43,25 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    set<int> added;
+    int cur = 1;
+    
+    int n;
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        added.insert(x);
+    }
+
+    while (true) {
+        if (!added.count(cur)) {
+            cout << cur << endl;
+            return 0;
+        }
+        cur++;
+    }
+
     return 0;
 }
+

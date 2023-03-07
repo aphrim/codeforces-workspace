@@ -43,5 +43,30 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+
+    set<char> types;
+    for (char c : s) types.insert(c);
+
+    map<char, int> counts;
+    set<char> enc;
+    int ret = n;
+    int i = 0, j = 0;
+    while (j < n) {
+        counts[s[j]]++;
+        enc.insert(s[j]);
+        while (counts[s[i]] > 1) {
+            counts[s[i]]--;
+            i++;
+        }
+        if (enc.size() == types.size()) ret = min(ret, j - i + 1);
+        j++;
+    }
+    cout << ret << endl;
+
     return 0;
 }
+

@@ -43,5 +43,31 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int k, n;
+        cin >> n >> k;
+        string s;
+        cin >> s;
+        vector<int> suffix(n);
+        int cur = INT_MAX;
+        for (int i = n - 1; i >= 0; i--) {
+            if (s[i] == '1') cur = 0;
+            else cur++;
+            suffix[i] = cur;
+        }
+
+        cur = INT_MAX;
+        int ret = 0;
+        for (int i = 0; i < n; i++) {
+            if (s[i] == '1') cur = 0;
+            else cur++;
+            if (cur > k && suffix[i] > k) ret++, cur = 0;
+        }
+        cout << ret << endl;
+    }
+
     return 0;
 }
+

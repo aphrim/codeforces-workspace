@@ -43,5 +43,32 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n, k;
+    cin >> n >> k;
+
+    int ret = 0, curL = 0;
+    string s;
+    cin >> s;
+
+    set<char> usable;
+    for (int i = 0; i < k; i++) {
+        char c;
+        cin >> c;
+        usable.insert(c);
+    }
+
+    for (int i =0; i < n; i++) {
+        if (usable.count(s[i])) curL++;
+        else {
+            ret += (curL * (curL + 1)) / 2;
+            curL = 0;
+        }
+    }
+    ret += (curL * (curL + 1)) / 2;
+
+    cout << ret << endl;
+
+
     return 0;
 }
+

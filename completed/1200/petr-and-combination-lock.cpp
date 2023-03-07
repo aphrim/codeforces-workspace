@@ -43,5 +43,24 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    cin >> a;
+
+    bool flag = false;
+    for (int i = 0; i <= pow(2, n); i++) {
+        int sum = 0;
+        for (int j = 0; j < n; j++) {
+            if (i & (1 << j)) sum += a[j];
+            else sum -= a[j];
+        }
+        sum %= 360;
+        if (sum == 0) flag = true;
+    }
+    if (flag) cout << "YES" << endl;
+    else cout << "NO" << endl;
+
     return 0;
 }
+

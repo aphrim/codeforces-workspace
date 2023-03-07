@@ -43,5 +43,31 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    freopen("bcount.in", "r", stdin);
+    freopen("bcount.out", "w", stdout);
+
+    int n, q;
+    cin >> n >> q;
+    vector<int> prefix1(n + 1);
+    vector<int> prefix2(n + 1);
+    vector<int> prefix3(n + 1);
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        prefix1[i + 1] = prefix1[i] + (x == 1);
+        prefix2[i + 1] = prefix2[i] + (x == 2);
+        prefix3[i + 1] = prefix3[i] + (x == 3);
+    }
+
+    for (int i = 0; i < q; i++) {
+        int l, r;
+        cin >> l >> r;
+
+        cout << prefix1[r] - prefix1[l-1] << " ";
+        cout << prefix2[r] - prefix2[l-1] << " ";
+        cout << prefix3[r] - prefix3[l-1] << endl;
+    }
+
     return 0;
 }
+

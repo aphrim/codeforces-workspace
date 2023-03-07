@@ -1,10 +1,8 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
+//TLE on test case 10 but I couldn't care less
 #include <bits/stdc++.h>
 #define int long long int
+
+#define USACO
 
 using namespace std;
 
@@ -27,21 +25,40 @@ struct custom_hash {
     }
 };
 
-int largeDiv(int a, int b) {
-    return (a + b - 1) / b;
-}
-
-bool isPrime(int x) {
-    if (x== 1) return false;
-    for (int i = 2; i <= sqrt(x); i++)
-        if (x % i == 0) return false;
-    return true;
-}
-
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("citystate.in", "r", stdin);
+    freopen("citystate.out", "w", stdout);
+#endif
+
+    map<string, vector<string>> states, cities;
+
+    int n;
+    cin >> n;
+    while (n--) {
+        string state, city;
+        cin >> city >> state;
+        if (string(city.begin(), city.begin() + 2) == state) continue;
+        cities[string(city.begin(), city.begin() + 2)].push_back(state);
+        states[state].push_back(string(city.begin(), city.begin() + 2));
+    }
+
+    int ret = 0;
+
+//    cout << states << endl << cities;
+
+    for (pair<string, vector<string>> p : cities) {
+        for (string city : states[p.first]) {
+            for (string state : p.second) {
+                if (state == city) 
+                    ret++;
+            }
+        }
+    }
+
+    cout << ret / 2 << endl;
 }

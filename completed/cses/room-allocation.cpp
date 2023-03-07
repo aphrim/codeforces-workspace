@@ -43,5 +43,35 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n;
+    cin >> n;
+    vector<pair<int, int>> arrivals(n), departures(n);
+    for (int i = 0; i < n; i++) {
+        cin >> arrivals[i].first >> departures[i].first;
+        arrivals[i].second = i;
+        departures[i].second = i;
+    }
+
+    sort(arrivals.begin(), arrivals.end());
+    sort(departures.begin(), departures.end());
+
+    int ret = 0;
+    vector<int> assigned(n);
+    set<int> free{1};
+
+    int i = 0, j = 0, cur = 0;
+    for (; i < arrivals.size(); i++) {
+        while (departures[j].first < arrivals[i].first) cur--, free.insert(assigned[departures[j].second]), j++; 
+        cur++;
+        ret = max(ret, cur);
+        if (free.size() == 0) free.insert(cur);
+        assigned[arrivals[i].second] = *free.begin();
+        free.erase(*free.begin());
+    }
+
+    cout << ret << endl << assigned << endl;
+
+
     return 0;
 }
+

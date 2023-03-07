@@ -43,5 +43,24 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    //O(n) go through, if cur is less than abs min then add i
+    int t;
+    cin >> t;
+    while (t--) {
+        int curDepth = 0, maxDepth = 0, ret = 0;
+        string s;
+        cin >> s;
+        int i = 1;
+        for (char c : s) {
+            if (c == '+') curDepth--;
+            else curDepth++;
+            if (curDepth > maxDepth) ret += i, maxDepth = curDepth;
+            i++;
+        }
+        ret += i - 1;
+        cout << ret << endl;
+    }
+
     return 0;
 }
+

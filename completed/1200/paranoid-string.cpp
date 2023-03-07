@@ -43,5 +43,27 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    //000001 becomes 1
+    //10000 becomes 0
+    //0010001001
+    //if below occures at index i
+    //01 => add i
+    //10 => add 1
+    
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        string a;
+        cin >> n >> a;
+        int ret = n;
+        for (int i = 0; i < n - 1; i++) {
+            if (a[i] == '0' && a[i+1] == '1') ret += i + 1;
+            else if (a[i] == '1' && a[i+1] == '0') ret += i + 1;
+        }
+        cout << ret << endl;
+    }
+
     return 0;
 }
+

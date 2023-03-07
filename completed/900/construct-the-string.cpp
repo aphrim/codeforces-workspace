@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -27,15 +24,19 @@ struct custom_hash {
     }
 };
 
-int largeDiv(int a, int b) {
-    return (a + b - 1) / b;
+int distinct(map<char, int> counts) {
+    int ret = 0;
+    for (pair<char, int> p : counts)
+        if (p.second != 0)
+            ret++;
+    return ret;
 }
 
-bool isPrime(int x) {
-    if (x== 1) return false;
-    for (int i = 2; i <= sqrt(x); i++)
-        if (x % i == 0) return false;
-    return true;
+int next(map<char, int> counts) {
+    for (char c = 'a'; c <= 'z'; c++) {
+        if (counts[c] == 0) return c;
+    }
+    return 'z';
 }
 
 int32_t main() {
@@ -43,5 +44,29 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, a, b;
+        cin >> n >> a >> b;
+        map<char, int> counts;
+        string s;
+        for (int i = 0; i < a; i++) {
+            if (distinct(counts) == b) s += s.back();
+            else s += next(counts);
+            counts[s.back()]++;
+        }
+        for (int i = 0; i < n - a; i++) {
+            counts[s[i]]--;
+            if (distinct(counts) == b) s += s.back();
+            else s += next(counts);
+            counts[s.back()]++;
+        }
+        cout << s << endl;
+    }
 }

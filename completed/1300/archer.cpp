@@ -43,5 +43,16 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int a, b, c, d;
+
+    cin >> a >> b >> c >> d;
+
+    double p = a / (double) b;
+    double q = (1 - p) * (1 - (c / (double) d));
+
+    double ret =  p / (1 - q);
+
+    cout << setprecision(9) << ret << endl;
     return 0;
 }
+

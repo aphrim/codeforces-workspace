@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -27,15 +24,25 @@ struct custom_hash {
     }
 };
 
-int largeDiv(int a, int b) {
-    return (a + b - 1) / b;
-}
-
-bool isPrime(int x) {
-    if (x== 1) return false;
-    for (int i = 2; i <= sqrt(x); i++)
-        if (x % i == 0) return false;
-    return true;
+string solve(string a, string b, int zc1, int zc2) {
+    if (a.size() + zc1 > b.size() + zc2) return ">";
+    if (a.size() + zc1 < b.size() + zc2) return "<";
+    for (int i = 0; i < min(a.size(), b.size()); i++) {
+        if (a[i] > b[i]) return ">";
+        if (a[i] < b[i]) return "<";
+    }
+    if (a.size() > b.size()) {
+        for (int i = b.size(); i < a.size(); i++)
+            if (a[i] - '0' > 0)
+                return ">";
+    } else if (b.size() > a.size()) {
+        for (int i = a.size(); i < b.size(); i++) {
+            if (b[i] - '0' > 0) {
+                return "<";
+            }
+        } 
+    }
+    return "=";
 }
 
 int32_t main() {
@@ -43,5 +50,17 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int t;
+    cin >> t;
+    while (t--) {
+        string a, b;
+        int zc1, zc2;
+        cin >> a >> zc1 >> b >> zc2;
+        cout << solve(a, b, zc1, zc2) << endl;
+    }
 }

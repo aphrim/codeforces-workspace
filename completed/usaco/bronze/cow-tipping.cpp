@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+#define USACO
 
 using namespace std;
 
@@ -27,21 +24,48 @@ struct custom_hash {
     }
 };
 
-int largeDiv(int a, int b) {
-    return (a + b - 1) / b;
-}
-
-bool isPrime(int x) {
-    if (x== 1) return false;
-    for (int i = 2; i <= sqrt(x); i++)
-        if (x % i == 0) return false;
-    return true;
-}
-
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("cowtip.in", "r", stdin);
+    freopen("cowtip.out", "w", stdout);
+#endif
+
+    int n;
+    cin >> n;
+    vector<vector<int>> a(n, vector<int>(n));
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            char c;
+            cin >> c;
+            a[i][j] = c - '0';
+        }
+    }
+
+
+    int ret = 0;
+    while (true) {
+        bool flag = true;
+        for (vector<int> v : a)
+            for (int x : v)
+                flag = flag && (x == 0);
+        if (flag) break;
+
+        ret++;
+
+        int x, y;
+        for (int i = 0; i < n; i++) 
+            for (int j = 0; j < n; j++)
+                if (a[i][j] == 1)
+                    x = i, y = j;
+
+        for (int i = 0; i <= x; i++) 
+            for (int j = 0; j <= y; j++)
+                a[i][j] = !a[i][j];
+    }
+
+    cout << ret << endl;
 }

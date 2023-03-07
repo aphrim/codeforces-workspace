@@ -43,5 +43,28 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n;
+    cin >> n;
+    set<int> occ;
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        occ.insert(x);
+    }
+
+    vector<int> v;
+    for (int x : occ) v.push_back(x);
+
+    if (occ.size() == 1) cout << 0 << endl;
+    else if (occ.size() == 2)  {
+        if ((v[1] - v[0]) % 2 == 0) cout << (v[1] - v[0]) / 2 << endl;
+        else cout << v[1] - v[0] << endl;
+    }
+    else if (occ.size() == 3) {
+        if (v[1] - v[0] == v[2] - v[1]) cout << v[2] - v[1] << endl;
+        else cout << -1 << endl;
+    } else cout << -1 << endl;
+
     return 0;
 }
+

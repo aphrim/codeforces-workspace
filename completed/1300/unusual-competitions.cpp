@@ -43,5 +43,28 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    //reorder every subsequence = 0
+
+    int n;
+    cin >> n;
+    int start = 0, curDepth = 0, ret = 0;
+    bool flag = false;
+    for (int i = 0; i < n; i++) {
+        char c;
+        cin >> c;
+        if (c == '(') curDepth++;
+        else curDepth--;
+        if (curDepth == 0 && flag) {
+            flag = false;
+            ret += i - start + 1;
+        } else if (curDepth < 0 && !flag) {
+            flag = true;
+            start = i;
+        }
+    }
+    if (curDepth != 0) cout << -1 << endl;
+    else cout << ret << endl;
+
     return 0;
 }
+

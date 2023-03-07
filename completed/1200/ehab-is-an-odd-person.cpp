@@ -43,5 +43,20 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    cin >> a;
+
+    int countEven = 0, countOdd = 0;
+    for (int x : a) countEven += !(x % 2), countOdd += x % 2;
+
+    if (countEven > 0 && countOdd > 0) sort(a.begin(), a.end(), [](int a, int b) {
+        return a < b;
+        //return to_string(a) < to_string(b);
+    });
+    cout << a << endl;
+
     return 0;
 }
+

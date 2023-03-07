@@ -43,5 +43,25 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n, s, t;
+    cin >> n >> s >> t;
+
+    vector<int> p(n);
+    cin >> p;
+    
+    if ( s == t ) {
+        cout << 0 << endl;
+        return 0;
+    }
+
+    int curPos = p[s - 1], moves = 1;
+    while (true) {
+        if (curPos == t || curPos == s) break;
+        else curPos = p[curPos - 1], moves++;
+    }
+    if (curPos == s) cout << -1 << endl;
+    else cout << moves << endl;
+
     return 0;
 }
+

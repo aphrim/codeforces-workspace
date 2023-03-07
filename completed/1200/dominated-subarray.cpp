@@ -43,5 +43,24 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        map<int, vector<int>> positions;
+        cin >> n;
+        for (int i = 0; i < n; i++) {
+            int x;
+            cin >> x;
+            positions[x].push_back(i);
+        }
+        int ret = -1;
+        for (pair<int, vector<int>> p : positions) {
+            for (int i = 1; i < p.second.size(); i++) if (ret == -1) ret = p.second[i] - p.second[i-1] + 1; else ret = min(ret, p.second[i] - p.second[i-1] + 1);
+        }
+        cout << ret << endl;
+    }
+
     return 0;
 }
+

@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -43,5 +40,38 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int t;
+    cin >> t;
+    while (t--) {
+        string s;
+        cin >> s;
+
+        vector<int> v;
+        for (char c : s) v.push_back(c - '0');
+
+        int comb = -1;
+        for (int i = 0; i < v.size() - 1; i++) {
+            if (v[i] + v[i+1] >= 10) comb = i;
+        }
+        if (comb == -1) comb = 0;
+
+        int sum = v[comb] + v[comb + 1];
+
+        if (sum / 10 == 1) {
+            v[comb] = 1;
+            v[comb + 1] = sum % 10;
+        } else {
+            v[comb] = sum;
+            v.erase(v.begin() + comb + 1);
+        }
+
+        for (int x : v) cout << x;
+        cout << endl;
+    }
 }
+

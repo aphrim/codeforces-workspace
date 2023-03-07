@@ -43,5 +43,15 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    cin >> a;
+
+    int sum = 0;
+    for (int x : a) sum += x;
+    if (sum % n == 0) cout << n << endl;
+    else cout << n - 1 << endl;
     return 0;
 }
+

@@ -38,10 +38,34 @@ bool isPrime(int x) {
     return true;
 }
 
+set<int> divisors(int x) {
+    set<int> ret;
+    for (int i = 1; i <= sqrt(x); i++) {
+        if (x % i == 0) ret.insert(i), ret.insert(x / i);
+    }
+    return ret;
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
+    int n;
+    cin >> n;
+    int x;
+    cin >> x;
+    int cur = x;
+    n--;
+    while (n--) {
+        cin >> x;
+        cur = __gcd(cur, x);
+    }
+
+    cout << divisors(cur).size() << endl;
+
+
+
     return 0;
 }
+

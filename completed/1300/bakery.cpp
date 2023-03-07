@@ -43,5 +43,31 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n, m, k;
+    cin >> n >> m >> k;
+
+    vector<vector<int>> cons;
+    for (int i = 0; i < m; i++) {
+        int u, v, l;
+        cin >> u >> v >> l;
+        cons.push_back({u, v, l});
+    }
+
+    set<int> storages;
+    for (int i = 0; i < k; i++) {
+        int x;
+        cin >> x;
+        storages.insert(x);
+    }
+
+    int mi = 1e10;
+    for (vector<int> con : cons) {
+        if ((storages.count(con[0]) && !storages.count(con[1])) || (storages.count(con[1]) && !storages.count(con[0]))) mi = min(mi, con[2]);
+    }
+
+    if (mi == 1e10) cout << -1 << endl;
+    else cout << mi << endl;
+
     return 0;
 }
+

@@ -43,5 +43,28 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        cin >> a;
+        sort(a.begin(), a.end());
+
+        int sa = 0, sb = 0;
+        for (int i = 0; i < n; i++) {
+            int x = a[n - 1 - i];
+            if (x % 2 == i % 2)  {
+                if (i % 2 == 0) sa += x;
+                else sb += x;
+            }
+        }
+        if (sa > sb) cout << "Alice" << endl;
+        else if (sb > sa) cout << "Bob" << endl;
+        else cout << "Tie" << endl;
+    }
+
     return 0;
 }
+

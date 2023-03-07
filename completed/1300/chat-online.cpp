@@ -38,10 +38,43 @@ bool isPrime(int x) {
     return true;
 }
 
+int overlap(int l1, int r1, int l2, int r2) {
+    if (r1 < l2) return -1;
+    if (l1 > r2) return 1;
+    return 0;
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
+    int p, q, l, r;
+    cin >> p >> q >> l >> r;
+
+    vector<pair<int, int>> z(p), x(q);
+    for (int i = 0; i < p; i++) cin >> z[i].first >> z[i].second;
+    for (int i = 0; i < q; i++) cin >> x[i].first >> x[i].second;
+
+    int ret = 0;
+    for (int t = l; t <= r; t++) {
+        bool br = false;
+        for (int i = 0; i < p; i++) {
+            for (int j = 0; j < q; j++) {
+                int o = overlap(z[i].first, z[i].second, x[j].first + t, x[j].second + t);
+                if (o == 0) {
+                    ret++;
+                    br = true;
+                    break;
+                }
+            }
+            if (br) break;
+        }
+    }
+
+    cout << ret << endl;
+
+
     return 0;
 }
+

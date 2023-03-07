@@ -43,5 +43,38 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+
+        vector<vector<int>> cols(n - 1, vector<int>(n));
+        vector<int> ret(n);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n - 1; j++) {
+                cin >> cols[j][i];
+            }
+        }
+
+        map<int, int> counts;
+        for (int x : cols[0]) counts[x]++;
+        for (pair<int, int> p : counts) {
+            if (p.second == 1) ret[1] = p.first;
+            else ret[0] = p.first;
+        }
+
+        for (int i = 1; i < n - 1; i++) {
+            counts = map<int, int>(); 
+            for (int x : cols[i]) counts[x]++;
+            for (pair<int, int> p : counts) {
+                if ((p.second == i + 1) && (p.first != ret[i])) ret[i+1] = p.first;
+            }
+        }
+        
+        cout << ret << endl;
+    }
+
     return 0;
 }
+

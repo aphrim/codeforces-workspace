@@ -43,5 +43,31 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n, q, k;
+    cin >> n >> q >> k;
+
+    vector<int> a(n);
+    cin >> a;
+    vector<int> prefix(n);
+    prefix[0] = a[0] - 1;
+    for (int i = 1; i < n - 1; i++) {
+        prefix[i] = prefix[i-1] + (a[i + 1] - a[i-1] - 2);
+    }
+    prefix[n - 1] = k - a[n-2] - 1;
+
+    while (q--) {
+        int l, r;
+        cin >> l >> r;
+        l--, r--;
+        if (l == r) {
+            cout << k - 1 << endl;
+            continue;
+        } else {
+            int sum = prefix[r-1] - prefix[l] + (k - a[r-1] - 1) + (a[l + 1] - 1);
+            cout << sum - 1 << endl;
+        }
+    }
+
     return 0;
 }
+

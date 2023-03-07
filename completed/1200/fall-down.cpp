@@ -43,5 +43,29 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, m;
+        cin >> n >> m;
+        vector<string> v(n);
+        cin >> v;
+        for (int i = 0; i < m; i++) {
+            for (int j = n - 1; j >= 0; j--) {
+                if (v[j][i] == '*') {
+                    int k = j + 1;
+                    for (; k <= n; k++) {
+                        if (k == n || v[k][i] != '.') break;
+                    }
+                    v[j][i] = '.';
+                    v[k - 1][i] = '*';
+                }
+            }
+        }
+        for (string s : v) cout << s << endl;
+        cout << endl;
+    }
+
     return 0;
 }
+

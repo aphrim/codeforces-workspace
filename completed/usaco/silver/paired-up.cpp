@@ -43,5 +43,31 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    freopen("pairup.in", "r", stdin);
+    freopen("pairup.out", "w", stdout);
+
+    int n;
+    cin >> n;
+    int time = 0;
+    vector<pair<int, int>> cows;
+    for (int i = 0; i < n; i++) {
+        int x, y;
+        cin >> x >> y;
+        cows.push_back({y, x});
+    }
+
+    sort(cows.begin(), cows.end());
+
+    int i = 0, j = cows.size() - 1;
+    while (i < j) { //Decrease j as fast as possible, avoid increasing i
+        int sub = min(cows[i].second, cows[j].second);
+        cows[i].second -= sub, cows[j].second -= sub;
+        time = max(time, cows[i].first + cows[j].first);
+        if (cows[i].second <= 0) i++;
+        if (cows[j].second <= 0) j--;
+    }
+    cout << time << endl;
+
     return 0;
 }
+

@@ -43,5 +43,28 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    //Partition value is sum of k max numbers;
+    int n, k;
+    cin >> n >> k;
+
+    vector<int> p(n);
+    cin >> p;
+    vector<pair<int, int>> sorted;
+    for (int i = 0;i < n; i++) sorted.push_back({p[i], i});
+    sort(sorted.begin(), sorted.end(), [](pair<int, int> x, pair<int, int> y) { return x.first > y.first; });
+    sorted = vector<pair<int, int>>(sorted.begin(), sorted.begin() + k);
+    sort(sorted.begin(), sorted.end(), [](pair<int, int> x, pair<int, int> y) { return x.second < y.second; });
+    int sum = 0, ret = 1;
+    for (int i = 1; i < k; i++) {
+        ret *= sorted[i].second - sorted[i-1].second;
+        ret %= 998244353;
+    }
+    for (int i = 0; i < k; i++) {
+        sum += sorted[i].first;
+    }
+
+    cout << sum << " " << ret << endl;
+
     return 0;
 }
+

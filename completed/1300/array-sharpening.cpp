@@ -43,5 +43,30 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        cin >> a;
+
+        int maxK = n;
+        for (int i = 0; i < maxK; i++) {
+            if (a[i] < i) maxK = i - 1; 
+        }
+        int minK = 0;
+        for (int i = n - 1; i >= minK; i--) {
+            if (a[i] < n - i - 1) minK = i + 1;
+        }
+        /*
+        if (minK <= maxK) cout << minK << " " << maxK << " " << "YES" << endl;
+        else cout << minK << " " << maxK << " " << "NO" << endl;
+        */
+        if (minK <= maxK) cout << "YES" << endl;
+        else cout << "NO" << endl;
+    }
+
     return 0;
 }
+

@@ -1,8 +1,3 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
 
@@ -38,10 +33,27 @@ bool isPrime(int x) {
     return true;
 }
 
+bool wins(int hc, int dc, int hm, int dm) {
+    return largeDiv(hm, dc) <= largeDiv(hc, dm);
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+    int t;
+    cin >> t;
+    while (t--) {
+        int hc, dc, hm, dm, k, w, a;
+        cin >> hc >> dc >> hm >> dm >> k >> w >> a;
+        bool flag = false;
+        for (int i = 0; i <= k; i++) {
+            flag = flag || wins(hc + i * a, dc + (k - i) * w , hm, dm);
+        }
+        if (flag)
+            cout << "YES" << endl;
+        else cout << "NO" << endl;
+    }
 }
+

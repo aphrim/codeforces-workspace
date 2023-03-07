@@ -1,8 +1,3 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
 
@@ -43,5 +38,34 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+    int n;
+    cin >> n;
+
+    vector<int> s1, s2, s3, pos, neg;
+    int zC = 0;
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        if (x == 0) zC++;
+        else if (x < 0) neg.push_back(x);
+        else pos.push_back(x);
+    }
+
+    if (neg.size() % 2 == 0) {
+        s3.push_back(neg.back());
+        neg.pop_back();
+    }
+    if (pos.size() == 0) {
+        pos.push_back(neg.back());
+        neg.pop_back();
+        pos.push_back(neg.back());
+        neg.pop_back();
+    }
+    for (int i = 0; i < zC; i++) s3.push_back(0);
+    for (int x : pos) s2.push_back(x);
+    for (int x : neg) s1.push_back(x);
+    cout << s1.size() << " " << s1 << endl;
+    cout << s2.size() << " " << s2 << endl;
+    cout << s3.size() << " " << s3 << endl;
 }
+

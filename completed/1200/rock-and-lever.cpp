@@ -43,5 +43,24 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        map<int, int> highestSetBitCounts;
+        while (n--) {
+            unsigned long long x;
+            cin >> x;
+            highestSetBitCounts[__builtin_clzll(x)]++;
+        }
+        int ret = 0;
+        for (pair<int, int> p : highestSetBitCounts) {
+            ret += p.second * (p.second - 1) / 2; 
+        }
+        cout << ret << endl;
+    }
+
     return 0;
 }
+

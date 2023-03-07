@@ -1,19 +1,7 @@
-<<<<<<< HEAD
 #include <bits/stdc++.h>
-#define int long long int
 
 //#define USACO
 
-=======
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
-#include <bits/stdc++.h>
-#define int long long int
-
->>>>>>> b9422077be39d8bdc406410c70b1dfa99d286c0a
 using namespace std;
 
 template<typename T> istream& operator>>(istream& in, vector<T>& a) {for(auto &x : a) in >> x; return in;};
@@ -35,8 +23,6 @@ struct custom_hash {
     }
 };
 
-<<<<<<< HEAD
-=======
 int largeDiv(int a, int b) {
     return (a + b - 1) / b;
 }
@@ -48,50 +34,71 @@ bool isPrime(int x) {
     return true;
 }
 
->>>>>>> b9422077be39d8bdc406410c70b1dfa99d286c0a
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
-<<<<<<< HEAD
 #ifdef USACO
     freopen("a.in", "r", stdin);
     freopen("a.out", "w", stdout);
 #endif
 
-=======
-    string pi = "314159265358979323846264338327";
->>>>>>> b9422077be39d8bdc406410c70b1dfa99d286c0a
     int t;
     cin >> t;
     while (t--) {
-        string s;
-        cin >> s;
-<<<<<<< HEAD
+        int k, n, m;
+        cin >> k >> n >> m;
 
-        bool ret = true;
-        int i = 0;
-        if (s[i] != 'Y' && s[i] != 'e' && s[i] != 's') ret = false;
-        for (i = 1; i < s.size(); i++) {
-            if (s[i] != 'Y' && s[i] != 'e' && s[i] != 's') ret = false;
-            if (s[i] == 'Y' && s[i-1] != 's') ret = false;
-            if (s[i] == 'e' && s[i-1] != 'Y') ret = false;
-            if (s[i] == 's' && s[i-1] != 'e') ret = false;
+        vector<int> a(n), b(m);
+        cin >> a >> b ; 
+
+        vector<int> ret;
+
+        int i = 0, j = 0;
+
+        bool flag = false;
+        while (i < n && j < m) {
+            if (a[i] == 0) {
+                ret.push_back(0);
+                k++, i++;
+            } else if (a[i] <= k) ret.push_back(a[i++]);
+            else if (b[j] == 0) {
+                ret.push_back(0);
+                k++, j++;
+            } else if (b[j] <= k) ret.push_back(b[j++]);
+            else {
+                flag = true;
+                break;
+            }
         }
-        if (ret) cout << "YES" << endl;
-        else cout << "NO" << endl;
+        while (i < n) {
+            if (a[i] == 0) {
+                ret.push_back(0);
+                i++, k++;
+            } else if (a[i] <= k) {
+                ret.push_back(a[i]);
+                i++;
+            } else {
+                flag = true;
+                break;
+            }
+        }
+
+        while (j < m) {
+            if (b[j] == 0) {
+                ret.push_back(0);
+                j++, k++;
+            } else if (b[j] <= k) {
+                ret.push_back(b[j]);
+                j++;
+            } else {
+                flag = true;
+                break;
+            }
+        }
+        if (flag) cout << -1 << endl;
+        else cout << ret << endl;
     }
 }
-=======
-        int i = 0;
-        for (; i < s.size(); i++) {
-            if (s[i] != pi[i]) break;
-        }
-        cout << i << endl;
-    }
 
-    return 0;
-}
-
->>>>>>> b9422077be39d8bdc406410c70b1dfa99d286c0a

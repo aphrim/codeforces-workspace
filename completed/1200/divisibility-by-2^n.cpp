@@ -43,5 +43,29 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            int x;
+            cin >> x;
+            while ( x % 2 == 0) x /= 2, sum++;
+        }
+        int rem = n - sum, moves = 0;
+        int minus = 0;
+        for (int i = 31; i >= 1; i--) {
+            int count = n / pow(2, i) - minus;
+            minus += count;
+            while (rem >= i && count) rem -= i, count--, moves++;
+        }
+        if (sum >= n) cout << 0 << endl;
+        else if (rem <= 0) cout << moves << endl;
+        else cout << -1 << endl;
+    }
+
     return 0;
 }
+

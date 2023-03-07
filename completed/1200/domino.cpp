@@ -43,5 +43,32 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n;
+    cin >> n;
+    int parityLeft = 0, parityRight = 0;
+    bool eo = false;
+
+    for (int i = 0; i < n; i++) {
+        int x, y;
+        cin >> x >> y;
+        parityLeft += x;
+        parityRight += y;
+        if (x % 2 != y % 2) eo = true;
+    }
+    parityLeft %= 2;
+    parityRight %= 2;
+
+    if (parityLeft && parityRight) {
+        if (eo) cout << 1 << endl;
+        else cout << -1 << endl;
+    } else if (!(parityLeft || parityRight)) {
+        cout << 0 << endl;
+    } else {
+        cout << -1 << endl;
+    }
+
+
+
     return 0;
 }
+

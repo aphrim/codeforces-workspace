@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -27,15 +24,37 @@ struct custom_hash {
     }
 };
 
-int largeDiv(int a, int b) {
-    return (a + b - 1) / b;
-}
+
+vector<set<int>> factorCache(3001);
 
 bool isPrime(int x) {
-    if (x== 1) return false;
-    for (int i = 2; i <= sqrt(x); i++)
+    for (int i = 2; i <= sqrt(x); i++) 
         if (x % i == 0) return false;
     return true;
+}
+
+set<int> factors(int x) {
+    if (factorCache[x].size()) return factorCache[x];
+    set<int> ret;
+    for (int i = 2; i <= sqrt(x); i++) {
+        if (x % i == 0) {
+            if (isPrime(i))
+                ret.insert(i);
+            else {
+                set<int> f = factors(i);
+                for (int factor : f) ret.insert(factor);
+            }
+
+            if (isPrime(x / i)) 
+                ret.insert(x / i);
+            else {
+                set<int> f = factors(x / i);
+                for (int factor : f) ret.insert(factor);
+            }
+        }
+    }
+    factorCache[x] = ret;
+    return ret;
 }
 
 int32_t main() {
@@ -43,5 +62,19 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int n;
+    cin >> n;
+
+    int ret = 0;
+    for (int i = 4; i <= n; i++) {
+        if (factors(i).size() == 2) ret++;
+    }
+    cout << ret << endl;
+
+
 }

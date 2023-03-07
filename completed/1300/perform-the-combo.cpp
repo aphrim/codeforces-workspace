@@ -43,5 +43,32 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, m;
+        cin >> n >> m;
+        string s;
+        vector<map<char, int>> prefix(n + 1);
+        for (int i = 1; i <= n; i++) {
+            char c;
+            cin >> c;
+            prefix[i] = prefix[i-1];
+            prefix[i][c]++;
+        }
+
+        map<char, int> counts;
+        for (int i = 0; i < m; i++) {
+            int ind;
+            cin >> ind;
+            for (pair<char, int> p : prefix[ind]) counts[p.first] += p.second;
+        }
+        for (pair<char, int> p : prefix.back()) counts[p.first] += p.second;
+        for (char c = 'a'; c <= 'z'; c++) cout << counts[c] << " ";
+        cout << endl;
+    }
+
+
     return 0;
 }
+

@@ -43,5 +43,26 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int c, m, x;
+        cin >> c >> m >> x;
+
+        int total = c + m + x;
+        int l = 0, r = total / 3, val = 0;
+        while (l <= r) {
+            int mid = (l + r) / 2;
+            if (mid > c || mid > m) r = mid - 1;
+            else if (mid < c && mid < m && mid < (total - 2 * (mid + 1))) l = mid + 1;
+            else {
+                val = mid;
+                break;
+            }
+        }
+        cout << val << endl;
+    }
+
     return 0;
 }
+

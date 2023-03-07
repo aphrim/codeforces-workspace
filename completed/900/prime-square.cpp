@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -27,15 +24,18 @@ struct custom_hash {
     }
 };
 
-int largeDiv(int a, int b) {
-    return (a + b - 1) / b;
-}
-
 bool isPrime(int x) {
-    if (x== 1) return false;
-    for (int i = 2; i <= sqrt(x); i++)
+    for (int i = 2; i <= sqrt(x); i++) 
         if (x % i == 0) return false;
     return true;
+}
+
+vector<int> getPrimes() {
+    vector<int> ret;
+    for (int i = 2; i < 500; i++) {
+        if (isPrime(i)) ret.push_back(i); 
+    }
+    return ret;
 }
 
 int32_t main() {
@@ -43,5 +43,29 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int t;
+    cin >> t;
+    vector<int> ps = getPrimes();
+    while (t--) {
+        int n;
+        cin >> n;
+
+        int i = 1;
+        while (true) {
+            if (ps[i] > n && !isPrime(ps[i] - n + 1)) break;
+            i++;
+        }
+
+        vector<vector<int>> ret(n, vector<int>(n, 1));
+        for (int j = 0; j < n; j++) {
+            ret[j][j] = ps[i] - n + 1;
+        }
+
+        for (vector<int> v : ret) cout << v << endl;
+    }
 }

@@ -43,5 +43,34 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n, k;
+    cin >> n >> k;
+
+    vector<pair<int, int>> vp(n);
+    for (int i = 0; i < n; i++) cin >> vp[i].first >> vp[i].second;
+
+    sort(vp.begin(), vp.end(), [](pair<int, int> l, pair<int, int> r) {
+        if (l.first != r.first)
+            return l.first > r.first;
+        return l.second < r.second;
+    });
+
+    vector<int> counts;
+    pair<int, int> last = {-1, -1};
+    for (int i = 0; i < n; i++) {
+        if (vp[i] == last) counts[counts.size() - 1]++;
+        else counts.push_back(1);        
+        last = vp[i];
+    }
+
+    int curSum = 0, i = 0;
+    for (; i < counts.size(); i++) {
+        curSum += counts[i];
+        if (curSum >= k) break;
+    }
+    cout << counts[i] << endl;
+
+
     return 0;
 }
+

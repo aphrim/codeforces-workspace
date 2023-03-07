@@ -43,5 +43,50 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, m;
+        cin >> n >> m;
+
+        set<int> swappable;
+        vector<int> arr(n);
+        cin >> arr;
+        vector<int> sorted = arr;
+        sort(sorted.begin(), sorted.end());
+
+        while (m--) {
+            int x;
+            cin >> x;
+            swappable.insert(x);
+        }
+
+        vector<pair<int, int>> ss;
+        int curL = 0, curR = 0;
+        for (int i = 0; i < n; i++) {
+            if (swappable.count(i)) {
+                curR = i;
+            } else {
+                if (curR > curL && swappable.count(i - 1))
+                    ss.push_back({curL, curR});
+                curL = i, curR = i;
+            }
+        }
+
+        if (curR > curL)
+            ss.push_back({curL, curR});
+
+        for (pair<int, int> lr : ss) {
+            sort(arr.begin() + lr.first, arr.begin() + lr.second + 1);
+        }
+        
+        if (arr == sorted)
+            cout << "YES" << endl;
+        else
+            cout << "NO" << endl;
+
+    }
+
     return 0;
 }
+

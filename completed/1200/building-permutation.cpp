@@ -43,5 +43,18 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    cin >> a;
+    sort(a.begin(), a.end());
+
+    int ret = 0;
+    for (int i = 0; i < n; i++) {
+        ret += abs((i + 1) - a[i]);
+    }
+    cout << ret << endl;
+
     return 0;
 }
+

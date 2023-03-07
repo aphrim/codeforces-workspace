@@ -43,5 +43,23 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    //151 173 140 184
+
+    vector<string> v(4);
+    cin >> v;
+
+    bool ret = false;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            int sum = v[i][j] + v[i+1][j] + v[i+1][j+1] + v[i][j+1];
+            ret = ret || (sum == 151 || sum == 173 || sum == 140 || sum == 184);
+        }
+    }
+    if (ret)
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
+
     return 0;
 }
+

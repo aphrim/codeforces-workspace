@@ -43,5 +43,29 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        map<int, vector<int>> occ;
+        for (int i = 0; i < n; i++) {
+            int x;
+            cin >> x;
+            occ[x].push_back(i);
+        }
+        int ret = n;
+        for (int i = 1; i <= n; i++) {
+            int last = -1, cur = 0;
+            for (int o : occ[i]) if (o != last + 1) cur++, last = o; else last = o;
+            if (occ[i].size() > 0 && occ[i].back() != n - 1) cur++;
+            if (last != -1) {
+                ret = min(ret, cur);
+            }
+        }
+        cout << ret << endl;
+    }
+
     return 0;
 }
+

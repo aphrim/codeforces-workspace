@@ -43,5 +43,27 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, s, r;
+        cin >> n >> s >> r;
+        int ma = s - r;
+        cout << s - r << " ";
+        n--, s = r;
+
+        int curSum = n * ma;
+        vector<int> ret(n, ma);
+        int i = 0;
+        while (curSum > s) {
+            ret[i] = max(ma - (curSum - s), 1ll);
+            curSum += ret[i] - ma;
+            i++;
+        }
+        cout << ret << endl;
+
+    }
+
     return 0;
 }
+

@@ -43,5 +43,29 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, m;
+        cin >> n >> m;
+
+        vector<string> v(n);
+        cin >> v;
+        int c1 = 0, mcz = 0;
+        for (int i =0; i < n; i++)
+            for (int j = 0; j < m; j++) {
+                if (v[i][j] == '1') c1++;
+                else {
+                    mcz = max(mcz, 1ll);
+                    if (i > 0 && v[i-1][j] == '0') mcz = max(mcz, 2ll);
+                    if (j > 0 && v[i][j-1] == '0') mcz = max(mcz, 2ll);
+                    if (i > 0 && j > 0 && v[i-1][j-1] == '0') mcz = max(mcz, 2ll);
+                    if (i > 0 && j < m - 1 && v[i-1][j+1] == '0') mcz = max(mcz, 2ll);
+                }
+            }
+        cout << c1 - (2 - mcz) << endl;
+    }
+
     return 0;
 }
+

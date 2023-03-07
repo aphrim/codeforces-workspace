@@ -43,5 +43,22 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n;
+    cin >> n;
+    int nn = n;
+    int ret = 0;
+    for (int i = 10; i >= 1; i--) {
+        while (n >= 2 * pow(10, i)) {
+            ret += pow(10, i) * floor(log10(nn) + 1);
+            n -= pow(10, i);
+        }
+        if (n >= pow(10, i)) {
+            ret += 9 * pow(10, i - 1) * i;
+            n -= pow(10, i - 1) * 9;
+        }
+    }
+    cout << ret + n * static_cast<int>(floor(log10(nn) + 1)) << endl;
+
     return 0;
 }
+

@@ -43,5 +43,32 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n), b(n), neg, pos;
+        cin >> a >> b;
+        for (int i = 0; i < n; i++) 
+            if (b[i] - a[i] < 0) neg.push_back(b[i] - a[i]);
+            else pos.push_back(b[i] - a[i]);
+        sort(neg.begin(), neg.end());
+        sort(pos.begin(), pos.end(), [](int x, int y) {return x > y;});
+        int i = 0, j = 0, ret = 0;
+        while (true) {
+            if (j >= pos.size()) break;
+            if (i == neg.size()) {
+                ret += (pos.size() - j) / 2;
+                break;
+            } else {
+                while (i < neg.size() && abs(neg[i]) > pos[j]) i++;
+                if (i < neg.size()) i++, j++, ret++;
+            }
+        }
+        cout << ret << endl;
+    }
+
     return 0;
 }
+

@@ -38,10 +38,41 @@ bool isPrime(int x) {
     return true;
 }
 
+int minDigit(int x) {
+    int ret = x % 10;
+    while (x >= 1) {
+        ret = min(ret, x % 10);
+        x /= 10;
+    }
+    return ret;
+}
+
+int maxDigit(int x) {
+    int ret = x % 10;
+    while (x >= 1) {
+        ret = max(ret, x % 10);
+        x /= 10;
+    }
+    return ret;
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int x, k;
+        cin >> x >> k;
+        while (k > 1 && minDigit(x) != 0) {
+            x += minDigit(x) * maxDigit(x);
+            k--;
+        }
+        cout << x << endl;
+    }
+
     return 0;
 }
+

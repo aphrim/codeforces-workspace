@@ -43,5 +43,21 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n, x;
+    cin >> n >> x;
+    vector<int> prefixSum(n + 1);
+    map<int, int> enc;
+    enc[0] = 1;
+    int ret = 0;
+    for (int i = 1; i <= n; i++) {
+        int y;
+        cin >> y;
+        prefixSum[i] = prefixSum[i-1] + y;
+        ret += enc[prefixSum[i] - x];
+        enc[prefixSum[i]]++;;
+    }
+    cout << ret << endl;
+
     return 0;
 }
+

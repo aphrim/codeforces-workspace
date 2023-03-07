@@ -43,5 +43,26 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n, m;
+    cin >> n >> m;
+
+    vector<int> a(n), b(m);
+    cin >> a >> b;
+
+    int i = 0, j = 0;
+    int ret = 0;
+
+    while (i < n) {
+        if (j < m - 1)
+            while (abs(b[j+1] - a[i]) <= abs(b[j] - a[i]))
+                j++; 
+        ret = max(ret, abs(b[j] - a[i]));
+        i++;
+    }
+    cout << ret << endl;
+
+
+
     return 0;
 }
+

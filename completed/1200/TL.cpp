@@ -43,5 +43,25 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n, m;
+    cin >> n >> m;
+    int maxCorrect = 0, minWrong = INT_MAX, minCorrect = INT_MAX;
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        maxCorrect = max(maxCorrect, x);
+        minCorrect = min(minCorrect, x);
+    }
+
+    for (int i = 0; i < m; i++) {
+        int x;
+        cin >> x;
+        minWrong = min(minWrong, x);
+    }
+
+    if (max(maxCorrect, minCorrect * 2) >= minWrong) cout << -1 << endl;
+    else cout << max(maxCorrect, minCorrect * 2) << endl;
+
     return 0;
 }
+

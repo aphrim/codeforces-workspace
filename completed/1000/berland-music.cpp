@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -43,5 +40,41 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        cin >> a;
+        vector<int> disliked, liked;
+        for (int i = 0; i < n; i++) {
+            char c;
+            cin >> c;
+            if (c == '1') liked.push_back(i);
+            else disliked.push_back(i);
+        }
+
+        sort(disliked.begin(), disliked.end(), [&](int x, int y) {
+            return a[x] > a[y];
+        });
+        sort(liked.begin(), liked.end(), [&](int x, int y) {
+            return a[x] < a[y];
+        });
+
+        int x = disliked.size();
+        for (int i = 0; i < disliked.size(); i++, x--) {
+            a[disliked[i]] = x; 
+        }
+        x = disliked.size() + 1;
+        for (int i = 0; i < liked.size(); i++, x++) {
+            a[liked[i]] = x; 
+        }
+        cout << a << endl;
+    }
 }

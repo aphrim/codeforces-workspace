@@ -38,10 +38,39 @@ bool isPrime(int x) {
     return true;
 }
 
+map<int, vector<int>> cons;
+vector<int> s;
+void dfs(int cur, set<int>& visited) {
+    if (visited.count(cur)) return;
+    visited.insert(cur);
+    for (int con : cons[cur]) {
+        s[con] = !s[cur];
+        dfs(con, visited);
+    }
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
+
+    //#set1 * #set2 - n + 1
+
+    int n;
+    cin >> n;
+    for (int i = 0; i < n - 1; i++) {
+        int u, v;
+        cin >> u >> v;
+        cons[u].push_back(v);
+        cons[v].push_back(u);
+    }
+    s = vector<int>(n + 1);
+    set<int> visited;
+    dfs(1, visited);
+
+    int cs1 = 0, cs2 = 0;
+    for (int i = 1; i <= n; i++) cs1 += s[i] == 0, cs2 += s[i] == 1;
+    cout << cs1 * cs2 - n + 1 << endl;
 
     return 0;
 }

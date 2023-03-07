@@ -43,5 +43,34 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        set<int> u1, u2;
+        int n;
+        cin >> n;
+        for (int i = 0; i < n; i++) u1.insert(i + 1), u2.insert(i + 1);
+
+        for (int i = 0; i < n; i++) {
+            int choiceCount;
+            cin >> choiceCount;
+            vector<int> choices(choiceCount);
+            cin >> choices;
+            for (int choice : choices) {
+                if (u2.count(choice)) {
+                    u2.erase(choice);
+                    u1.erase(i + 1);
+                    break;
+                }
+            }
+        }
+        if (u1.size() > 0) {
+            cout << "IMPROVE \n" << *u1.begin() << " " << *u2.begin() << endl;
+        } else {
+            cout << "OPTIMAL" << endl;
+        }
+    }
+
     return 0;
 }
+

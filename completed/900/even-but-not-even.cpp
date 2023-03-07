@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -27,21 +24,48 @@ struct custom_hash {
     }
 };
 
-int largeDiv(int a, int b) {
-    return (a + b - 1) / b;
-}
-
-bool isPrime(int x) {
-    if (x== 1) return false;
-    for (int i = 2; i <= sqrt(x); i++)
-        if (x % i == 0) return false;
-    return true;
-}
-
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        string s;
+        cin >> n >> s;
+
+        int evenCount = 0, oddCount = 0;
+        for (char c : s) {
+            evenCount += (c - '0') % 2 == 0;
+            oddCount += (c - '0') % 2 == 1;
+        }
+        if (oddCount < 2) {
+            cout << -1 << endl;
+            continue;
+        }
+
+        while ((s.back() - '0') % 2 == 0 ) {
+            evenCount--;
+            s.erase(s.size() - 1);
+        }
+
+        bool evenParity = (evenCount * 2 + oddCount) % 2 == 0;
+        if (!evenParity) {
+            for (int i = 0; i < n; i++) {
+                if ((s[i] - '0') % 2 == 1) {
+                    s.erase(i, 1);
+                    break;
+                }
+            }
+        }
+        while (s[0] == '0') s.erase(0, 1);
+        cout << s << endl;
+    }
 }

@@ -43,5 +43,22 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        string last;
+        for (int i = 0; i <= 100; i++) last.push_back('a');
+        cout << last << endl;
+        int n;
+        cin >> n;
+        while (n--) {
+            int same;
+            cin >> same;
+            last[same] = ((last[same] == 'a') ? 'b' : 'a');
+            cout << last << endl;
+        }
+    }
+
     return 0;
 }
+

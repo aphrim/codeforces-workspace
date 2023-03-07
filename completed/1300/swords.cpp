@@ -43,5 +43,34 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    cin >> a;
+
+    sort(a.begin(), a.end());
+
+    int diff = a.back() - a[0];
+    for (int i = 1; i < n; i++) {
+        int curDiff = a.back() - a[i];
+        if (curDiff) {
+            diff = __gcd(curDiff, diff);
+        }
+    }
+
+    if (a.back() == a[0]) {
+        cout << "0 0" << endl;
+        return 0;
+    }
+
+    int people = 0;
+    int maxEl = a.back();
+    for (int i = 0; i < n; i++) {
+        people += (maxEl - a[i]) / diff;
+    }
+
+    cout << people << " " << diff << endl;
+
     return 0;
 }
+

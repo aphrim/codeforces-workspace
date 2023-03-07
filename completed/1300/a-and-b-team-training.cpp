@@ -43,5 +43,16 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int moves = 0;
+    int n, m;
+    cin >> n >> m;
+    while (min(n, m) >= 1 && max(n, m) >= 2) {
+        if (n > m) n -= 2, m -= 1;
+        else n -= 1, m -= 2;
+        moves++;
+    }
+    cout << moves << endl;
+
     return 0;
 }
+

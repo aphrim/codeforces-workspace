@@ -43,5 +43,43 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        cin >> a;
+
+        vector<int> counts(2);
+        for (int x : a) counts[x % 2]++;
+        if (abs(counts[0] - counts[1]) > 1) {
+            cout << -1 << endl;
+            continue;
+        }
+
+        int i = 1, j = -1, ret1 = 0, ret2 = 0;
+        if (counts[1] >= counts[0]) 
+            while (i < n) {
+                j++;
+                while (j < n && a[j] % 2) j++;
+                ret1 += abs(j - i);
+                i += 2;
+            }
+        else ret1 = INT_MAX;
+
+        i = 0, j = -1;
+        if (counts[0] >= counts[1])
+            while (i < n) {
+                j++;
+                while (j < n && a[j] % 2) j++;
+                ret2 += abs(j - i);
+                i += 2;
+            }
+        else ret2 = INT_MAX;
+        cout << min(ret1, ret2) << endl;
+    }
+
     return 0;
 }
+

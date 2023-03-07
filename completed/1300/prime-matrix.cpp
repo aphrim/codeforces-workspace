@@ -43,5 +43,42 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n, m;
+    cin >> n >> m;
+    vector<vector<int>> a(n, vector<int>(m));
+
+    vector<int> primes;
+    for (int i = 2; i <= 1e6; i++) {
+        if (isPrime(i)) primes.push_back(i);
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            int x;
+            cin >> x;
+            a[i][j] = *lower_bound(primes.begin(), primes.end(), x) - x;
+        }
+    }
+
+    int ret = INT_MAX;
+    for (int i = 0; i < n; i++) {
+        int cur = 0;
+        for (int j = 0; j < m; j++) {
+            cur += a[i][j];
+        }
+        ret = min(ret, cur);
+    }
+
+    for (int j = 0; j < m; j++) {
+        int cur = 0;
+        for (int i = 0; i < n; i++) {
+            cur += a[i][j];
+        }
+        ret = min(ret, cur);
+    }
+
+    cout << ret << endl;
+
     return 0;
 }
+

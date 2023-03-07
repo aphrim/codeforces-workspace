@@ -43,5 +43,30 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+
+    int x, n;
+    cin >> x >> n;
+
+    multiset<int> segs;
+    set<int> points;
+    points.insert(0);
+    points.insert(x);
+    segs.insert(x);
+
+    for (int i = 0; i < n; i++) {
+        int pos;
+        cin >> pos;
+        auto a = points.upper_bound(pos);
+        int upper = *a;
+        int lower = *(--a);
+        segs.erase(segs.find(upper - lower));
+        segs.insert(pos - lower);
+        segs.insert(upper - pos);
+        points.insert(pos);
+        cout << *(--segs.end()) << " ";
+    }
+    cout << endl;
+
     return 0;
 }
+

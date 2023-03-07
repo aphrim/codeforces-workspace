@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -27,14 +24,9 @@ struct custom_hash {
     }
 };
 
-int largeDiv(int a, int b) {
-    return (a + b - 1) / b;
-}
-
-bool isPrime(int x) {
-    if (x== 1) return false;
-    for (int i = 2; i <= sqrt(x); i++)
-        if (x % i == 0) return false;
+bool isIncreasing(vector<int> a) {
+    for (int i = 1; i < a.size(); i++) 
+        if (a[i] <= a[i-1]) return false;
     return true;
 }
 
@@ -43,5 +35,37 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        cin >> a;
+
+        int ops = 0;
+        bool flag = false;
+        while (!isIncreasing(a)) {
+            for (int i = 1; i < n; i++) {
+                if (a[i] <= a[i-1]) {
+                    a[i-1] = a[i-1] / 2;
+                    ops++;
+                }
+                if (a[i] == 0 && a[i-1] == 0) {
+                    cout << -1 << endl;
+                    flag = true;
+                    break;
+                }
+            }
+            if (flag) break;
+        }
+        if (flag) continue;
+        cout << ops << endl;
+
+    }
 }

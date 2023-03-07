@@ -43,5 +43,31 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> miners, mines;
+        for (int i = 0; i < 2 * n; i++) {
+            int x, y;
+            cin >> x >> y;
+            if (x == 0) miners.push_back(y);
+            else mines.push_back(x);
+        }
+
+        sort(miners.begin(), miners.end(), [](int a, int b) { return abs(a) < abs(b); });
+        sort(mines.begin(), mines.end(), [](int a, int b) { return abs(a) < abs(b); });
+
+        double ret = 0;
+        for (int i = 0; i < n; i++) {
+           ret += sqrt(mines[i] * mines[i] + miners[i] * miners[i]);
+        }
+        cout << setprecision(18);
+        cout << ret << endl;
+
+    }
+
     return 0;
 }
+

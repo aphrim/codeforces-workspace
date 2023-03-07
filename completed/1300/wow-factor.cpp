@@ -43,5 +43,27 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    string s;
+    cin >> s;
+    int n = s.size();
+    vector<int> prefix(n, 0), suffix(n, 0);
+
+    for (int i = 1; i < n; i++) {
+        prefix[i] = prefix[i-1];
+        if (s[i] == 'v' && s[i - 1] == 'v') prefix[i]++;
+    }
+
+    for (int i = n - 2; i >= 0; i--) {
+        suffix[i] = suffix[i + 1];
+        if (s[i] == 'v' && s[i + 1] == 'v') suffix[i]++;
+    }
+
+    int ret = 0;
+    for (int i = 0; i < n; i++) {
+        if (s[i] == 'o') ret += prefix[i] * suffix[i];
+    }
+    cout << ret << endl;
+
     return 0;
 }
+

@@ -43,5 +43,23 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        vector<int> v(3);
+        cin >> v;
+        sort(v.begin(), v.end());
+
+        int ret = min(v[2], v[1]);
+        v[2] -= ret, v[1] -= ret;
+        int mi = min(v[2], v[0]);
+        ret += mi;
+        v[0] -= mi;
+        ret += v[0] / 2;
+
+        cout << ret << endl;
+    }
+
     return 0;
 }
+

@@ -1,8 +1,3 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
 
@@ -43,5 +38,33 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+
+        vector<int> ch(n);
+        int sum = 0;
+
+        n--;
+        for (int i = 0; i <= n; i++) {
+            char c;
+            cin >> c;
+            if (c == 'L') ch[i] = n - i - i, sum += i;
+            else ch[i] = i + i - n, sum += n - i;
+        }
+
+
+        sort(ch.begin(), ch.end(), [](int a, int b) {
+            return a > b;
+        });
+
+        for (int i = 0; i <= n; i++) {
+            if (ch[i] > 0) sum += ch[i];
+            cout << sum << " ";
+        }
+        cout << endl;
+    }
 }
+

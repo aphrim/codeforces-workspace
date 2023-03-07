@@ -43,5 +43,16 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int y, k, n;
+    cin >> y >> k >> n;
+
+    vector<int> ret;
+    int dif = k - (y % k);
+    for (int i = dif; i + y <= n; i += k)
+        ret.push_back(i);
+    if (ret.size() == 0) cout << -1 << endl;
+    else cout << ret << endl;
+
     return 0;
 }
+

@@ -43,5 +43,20 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n;
+    cin >> n;
+    vector<pair<int, int>> v(n);
+    for (int i = 0; i < n; i++) cin >> v[i].first >> v[i].second;
+    sort(v.begin(), v.end());
+
+    int cur = 0;
+    for (pair<int, int> p : v) {
+        if (p.second >= cur) cur = p.second;
+        else cur = p.first;
+    }
+
+    cout << cur << endl;
+
     return 0;
 }
+

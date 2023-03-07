@@ -43,5 +43,26 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        cin >> a;
+
+        bool foundg1 = false, foundEven = false;
+        int sum = 0;
+        for (int i = 1; i < n - 1; i++) {
+            foundg1 |= a[i] > 1;
+            foundEven |= !(a[i] % 2);
+            sum += (a[i] + 1) / 2;
+        }
+        if ((foundg1 && n > 3) || foundEven) cout << sum << endl;
+        else cout << -1 << endl;
+
+    }
+
     return 0;
 }
+

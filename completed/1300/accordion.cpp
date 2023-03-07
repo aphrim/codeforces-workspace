@@ -43,5 +43,42 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+
+    int start = 0, end = 0;
+    string s;
+    cin >> s;
+    while (start < s.size() && s[start] != '[') start++;
+    if (start == s.size()) {
+        cout << -1 << endl;
+        return 0;
+    }
+    end = start;
+    int foundEnd = -1;
+    for (; end < s.size(); end++)
+        if (s[end] == ']') foundEnd = end;
+    if (start == s.size()) {
+        cout << -1 << endl;
+        return 0;
+    }
+
+    end = foundEnd;
+
+    int minus = 0;
+    int firstColon = -1, lastColon = -1;
+    for (int i = start + 1; i < end; i++) {
+        if (s[i] == ':' && firstColon == -1) firstColon = i;
+        else if (s[i] == ':') lastColon = i; 
+    }
+    if (lastColon == -1) {
+        cout << -1 << endl;
+        return 0;
+    }
+
+    for (int i = firstColon + 1; i < lastColon; i++)
+        if (s[i] != '|') minus++;
+
+    cout << lastColon - firstColon - minus + 3 << endl;
+
     return 0;
 }
+

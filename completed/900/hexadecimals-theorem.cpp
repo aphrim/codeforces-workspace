@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -27,15 +24,18 @@ struct custom_hash {
     }
 };
 
-int largeDiv(int a, int b) {
-    return (a + b - 1) / b;
-}
+map<int, pair<int, int>> fs;
 
-bool isPrime(int x) {
-    if (x== 1) return false;
-    for (int i = 2; i <= sqrt(x); i++)
-        if (x % i == 0) return false;
-    return true;
+void precalc() {
+    fs[0] = {0, 0};
+    fs[1] = {1, 0};
+    int l1 = 0, l2 = 1;
+    for (int i = 2; i < 50; i++) {
+        int cur = l1 + l2;
+        fs[cur] = {l1, l2};
+        l2 = l1;
+        l1 = cur;
+    }
 }
 
 int32_t main() {
@@ -43,5 +43,15 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    precalc();
+    int x;
+    cin >> x;
+    cout << fs[fs[x].first].first << " " << fs[fs[x].first].second << " " << fs[x].second << endl;
+
+
 }

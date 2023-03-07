@@ -38,10 +38,46 @@ bool isPrime(int x) {
     return true;
 }
 
+typedef struct Node {
+    vector<string> next;
+};
+
+map<string, Node*> nodes;
+
+int dfs(string cur) {
+    if (nodes[cur] == nullptr) return 1;
+    int ret = 1;
+    for (string node : nodes[cur]->next)
+        ret = max(ret, dfs(node) + 1);
+    return ret;
+}
+
+string tolower(string a) {
+    for (char& c : a) if (c < 'a') c = c - 'A' + 'a';
+    return a;
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
+    Node* base = new Node();
+    nodes["polycarp"] = base;
+    int n;
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        string a, b;
+        cin >> a >> b >> b;
+        a = tolower(a), b = tolower(b);
+        if (nodes[b] == nullptr) nodes[b] = new Node();
+        nodes[b]->next.push_back(a);
+    }
+
+    cout << dfs("polycarp") <<  endl;
+
+    for (pair<string, Node*> p : nodes) delete p.second;
+
     return 0;
 }
+

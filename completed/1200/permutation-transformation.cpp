@@ -38,10 +38,35 @@ bool isPrime(int x) {
     return true;
 }
 
+vector<int> ret;
+map<int, int> positions;
+
+void createSubtrees(vector<int> a, int depth) {
+    if (a.size() == 0) return;
+    int maxElementPos = max_element(a.begin(), a.end()) - a.begin();
+    ret[positions[a[maxElementPos]]] = depth - 1;
+    createSubtrees(vector<int>(a.begin(), a.begin() + maxElementPos), depth + 1);
+    createSubtrees(vector<int>(a.begin() + maxElementPos + 1, a.end()), depth + 1);
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        ret = vector<int>(n);
+        vector<int> a(n);
+        cin >> a;
+        for (int i = 0; i < n; i++) positions[a[i]] = i;
+        createSubtrees(a, 1);
+        cout << ret << endl;
+    }
+
     return 0;
 }
+

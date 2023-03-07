@@ -43,5 +43,28 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        cin >> a;
+        bool change = true;
+        while (change && a.size() > 0) {
+            change = false;
+            for (int i = a.size() - 1; i >= 0; i--) {
+                if (a[i] % (i + 2) != 0) {
+                    a.erase(a.begin() + i);
+                    change = true;
+                    break;
+                }
+            }
+        }
+        if (a.size() == 0) cout << "YES" << endl;
+        else cout << "NO" << endl;
+    }
+
     return 0;
 }
+

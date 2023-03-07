@@ -43,5 +43,24 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n, k;
+    cin >> n >> k;
+    vector<int> a(n), t(n);
+    cin >> a >> t;
+
+    int totalSum = 0;
+    for (int i = 0; i < n; i++) totalSum += a[i] * t[i];
+
+    int curAdd = 0;
+    for (int i = 0; i < k; i++) curAdd += a[i] * (!t[i]);
+    int maxAdd = curAdd;
+    for (int i = 0; i < n - k; i++) {
+        curAdd -= a[i] * (!t[i]);
+        curAdd += a[i + k] * (!t[i + k]);
+        maxAdd = max(maxAdd, curAdd);
+    }
+    cout << maxAdd + totalSum << endl;
+
     return 0;
 }
+

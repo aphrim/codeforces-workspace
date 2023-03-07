@@ -43,5 +43,21 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+
+    while (t--) {
+        int x;
+        cin >> x;
+        int i = 1;
+        for (;i <= 31; i++) {
+            int n = pow(2, i) - 1;
+            if (((n + 1) * n) / 2 > x) break;
+            x -= (n + 1) * n / 2;
+        }
+        cout << i - 1 << endl;
+    }
+
     return 0;
 }
+

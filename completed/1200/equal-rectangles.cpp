@@ -43,5 +43,24 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n * 4);
+        cin >> a;
+        sort(a.begin(), a.end());
+        n *= 4;
+        int prod = a[0] * a[n - 1];
+        bool flag = true;
+        for (int i = 0; i < n / 2; i += 2) {
+            if (a[i] != a[i+1]) flag = false;
+            if (a[n - i - 1] != a[n - i - 2]) flag = false;
+            if (a[i] * a[n - i - 1] != prod) flag = false;
+        }
+        if (flag) cout << "YES" << endl;
+        else cout << "NO" << endl;
+    }
 }
+

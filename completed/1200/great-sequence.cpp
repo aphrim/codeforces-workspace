@@ -43,5 +43,31 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, x, ret = 0;
+        cin >> n >> x;
+
+        map<int, int> counts;
+
+        for (int i = 0; i < n; i++) {
+            int y;
+            cin >> y;
+            counts[y]++;
+        }
+
+        for (pair<int, int> p : counts) {
+            if (p.second == 0) continue;
+            int overlap = min(p.second, counts[p.first * x]);
+            ret += p.second - overlap, counts[p.first * x] -= overlap;
+        }
+
+        cout << ret << endl;
+    
+
+    }
+
     return 0;
 }
+

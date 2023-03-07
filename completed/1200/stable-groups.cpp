@@ -43,5 +43,31 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n, k, x;
+    cin >> n >> k >> x;
+
+    vector<int> a(n);
+    cin >> a;
+    sort(a.begin(), a.end());
+
+    vector<int> gaps;
+    for (int i = 1; i < n; i++) {
+        if (a[i] - a[i-1] > x) gaps.push_back(a[i] - a[i-1]);
+    }
+    sort(gaps.begin(), gaps.end());
+
+    int i = 0;
+    while (true) {
+        if (i >= gaps.size()) break;
+        int cost = (gaps[i] - 1) / x;
+        if (cost <= k) {
+            i++;
+            k -= cost;
+        } else break;
+    }
+
+    cout << max(static_cast<int>(gaps.size()) - i, 0ll) + 1 << endl;
+
     return 0;
 }
+

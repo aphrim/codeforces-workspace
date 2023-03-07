@@ -43,5 +43,26 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, m;
+        cin >> n  >> m;
+        //Sort reverse order k?
+        //costs is already sorted.
+        
+        vector<int> k(n), c(m);
+        cin >> k >> c;
+        sort(k.begin(), k.end(), [](int a, int b) {return a > b;});
+        int curInd = 0;
+        int ret = 0;
+        for (int i = 0; i < n; i++) {
+            if (curInd < k[i] - 1) ret += c[curInd++];
+            else ret += c[k[i] - 1];
+        }
+        cout << ret << endl;
+    }
+
     return 0;
 }
+

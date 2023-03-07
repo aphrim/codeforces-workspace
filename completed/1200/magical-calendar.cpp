@@ -43,5 +43,17 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, r;
+        int ret = 0;
+        cin >> n >> r;
+        if (r >= n) r = n, ret++, ret -= n;
+        ret += (r + 1) * (r) / 2;
+        cout << ret << endl;
+    }
+
     return 0;
 }
+

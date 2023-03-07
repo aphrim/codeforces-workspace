@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -27,15 +24,16 @@ struct custom_hash {
     }
 };
 
-int largeDiv(int a, int b) {
-    return (a + b - 1) / b;
-}
-
-bool isPrime(int x) {
-    if (x== 1) return false;
-    for (int i = 2; i <= sqrt(x); i++)
-        if (x % i == 0) return false;
-    return true;
+vector<pair<int, int>> factors(int x) {
+    vector<pair<int, int>> ret;
+    for (int i = 1; i <= sqrt(x); i++) {
+        if (x % i == 0) {
+            ret.push_back({i, x / i});
+            if (i != x / i)
+                ret.push_back({x / i, i});
+        }
+    }
+    return ret;
 }
 
 int32_t main() {
@@ -43,5 +41,17 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int n, x;
+    cin >> n >> x;
+
+    vector<pair<int, int>> fs = factors(x);
+    int ret = 0;
+    for (pair<int, int> f : fs) 
+        if (f.first <= n && f.second <= n) ret++;
+    cout << ret << endl;
 }

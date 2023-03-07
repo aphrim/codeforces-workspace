@@ -43,5 +43,33 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        map<int, int> counts;
+        for (int i = 0; i < n; i++) {
+            int x;
+            cin >> x;
+            counts[x]++;
+        }
+
+        int sets = 0;
+        for (pair<int, int> p : counts) {
+            int i = 0, sub = p.second;
+            sets += p.second;
+            while (sub > 0) {
+                sub = min(sub, counts[p.first + i]);
+                counts[p.first + i] -= sub;
+                i++;
+            }
+        }
+
+        cout << sets << endl;
+
+    }
+
     return 0;
 }
+

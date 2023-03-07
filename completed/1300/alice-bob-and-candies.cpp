@@ -43,5 +43,44 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        cin >> a;
+        int l = 1, r = n - 1;
+        int last = a[0], cur = 0, totalMoves = 1;
+        int aliceEaten = a[0], bobEaten = 0;
+        bool aliceMove = false;
+        while (l <= r) {
+            if (aliceMove) {
+                if (cur > last) {
+                    totalMoves++;
+                    aliceMove = false;
+                    last = cur;
+                    cur = 0;
+                } else {
+                    aliceEaten += a[l];
+                    cur += a[l++];
+                }
+            } else {
+                if (cur > last) {
+                    totalMoves++;
+                    aliceMove = true;
+                    last = cur;
+                    cur = 0;
+                } else {
+                    bobEaten += a[r];
+                    cur += a[r--];
+                }
+            }
+        }
+        if (bobEaten > 0) totalMoves++;
+        cout << totalMoves << " " << aliceEaten << " " << bobEaten << endl;
+    }
+
     return 0;
 }
+

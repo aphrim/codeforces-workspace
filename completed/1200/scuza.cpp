@@ -43,5 +43,28 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, q;
+        cin >> n >> q;
+        vector<int> prefix(n + 1, 0), a(n + 1, 0);
+        for (int i = 1; i <= n; i++){
+            int x;
+            cin >> x;
+            prefix[i] = prefix[i-1] + x;
+            a[i] = max(a[i-1], x);
+        }
+
+        while (q--) {
+            int x;
+            cin >> x;
+            int i = upper_bound(a.begin(), a.end(), x) - a.begin();
+            cout << prefix[i - 1] << " ";
+        }
+        cout << endl;
+    }
+
     return 0;
 }
+

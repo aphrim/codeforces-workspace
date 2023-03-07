@@ -43,5 +43,38 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        cin >> a;
+        int minIndex = min_element(a.begin(), a.end()) - a.begin();
+        int minEl = a[minIndex];
+
+        vector<vector<int>> ops;
+        if (minIndex == 1) {
+            ops.push_back({1, 2, minEl + 1, minEl});
+        }
+        for (int i = 1; i < n; i++) {
+            if (i != minIndex) {
+                vector<int> op(4);
+                if (i < minIndex) op = {i + 1, minIndex + 1, a[i-1] + 1, minEl};
+                else op = {minIndex + 1, i + 1, minEl, a[i-1] + 1};
+                a[i] = a[i-1] + 1;
+                if (i == minIndex - 1) {
+                    int x = minEl;
+                    while ((__gcd(x, a[i-1]) != 1) || (__gcd(x, minEl) != 1)) x++;
+                    op[2] = x, a[i] = x;
+                }
+                ops.push_back(op);
+            }
+        }
+        cout << ops.size() << endl;
+        for (vector<int> op : ops) cout << op << endl;
+    }
+
     return 0;
 }
+

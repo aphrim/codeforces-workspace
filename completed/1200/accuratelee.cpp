@@ -43,5 +43,32 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        int buffer1 = 0;
+        int zb1 = 0, z = 0;
+        bool enc1 = false;
+        while (n--) {
+            char c;
+            cin >> c;
+            if (c == '1') buffer1++, enc1 = true; 
+            else {
+                buffer1 = 0;
+                if (!enc1) zb1++;
+                else z = 1;
+            }
+        }
+
+        string ret;
+        if (z + zb1 >= 1) for (int i = 0; i < zb1 + z; i++) ret += '0';
+        for (int i = 0; i < buffer1; i++) ret += '1';
+        cout << ret << endl;
+
+    }
+
     return 0;
 }
+

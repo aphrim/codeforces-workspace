@@ -43,5 +43,23 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    cin >> a;
+
+    int ret = 1, cur = 1;
+    for (int i = 1; i < n; i++) {
+        if (a[i] > a[i-1] * 2) {
+            cur = 1;
+        } else {
+            cur++;
+            ret = max(ret, cur);
+        }
+    }
+    
+    cout << ret << endl;
+
     return 0;
 }
+

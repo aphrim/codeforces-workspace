@@ -38,10 +38,46 @@ bool isPrime(int x) {
     return true;
 }
 
+set<int> divisors(int x) {
+    set<int> ret;
+    for (int i = 1; i <= sqrt(x); i++) {
+        if (x % i == 0) ret.insert(x / i), ret.insert(i);
+    }
+    return ret;
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
+    int n;
+    cin >> n;
+    map<int, int> counts;
+    map<int, set<int>> cache;
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        set<int> divs;
+        if (cache[x].size() == 0) {
+            divs = divisors(x);
+            cache[x] = divs;
+        } else divs = cache[x];
+        for (int d : divs) counts[d]++;
+    }
+
+    int base = 1;
+    int maxO = 1;
+    for (pair<int, int> p : counts) {
+        if (p.first > maxO && p.second == n - 1) maxO = p.first;
+        if (p.second == n) base = lcm(base, p.first);
+    }
+
+    cout << lcm(base, maxO) << endl;
+
+
+
+
     return 0;
 }
+

@@ -43,5 +43,38 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        map<int, int> tb, bt; //Top to bottom, bottom to top
+        vector<int> a(n), b(n);
+        cin >> a >> b;
+        for (int i = 0; i < n; i++) {
+            tb[a[i]]  = b[i];
+            bt[b[i]]  = a[i];
+        }
+
+        set<int> used;
+        int ret = 1;
+
+        for (int i = 1; i <= n; i++) {
+            if (!used.count(i)) {
+                ret *= 2;
+                used.insert(i);
+                int cur = tb[i];
+                if (cur == i) ret /= 2;
+                while (cur != i) {
+                    used.insert(cur);
+                    cur = tb[cur];
+                }
+                ret %= static_cast<int>(1e9 + 7);
+            }
+        }
+        cout << ret << endl;
+    }
+
     return 0;
 }
+

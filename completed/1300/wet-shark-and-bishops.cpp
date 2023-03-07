@@ -43,5 +43,26 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n;
+    cin >> n;
+    map<int, int> counts, counts2;
+    for (int i = 0; i < n; i++) {
+        int x, y;
+        cin >> x >> y;
+        counts[x-y]++;
+        counts2[2e5+1 - x - y]++;
+    }
+
+    int ret = 0;
+    for (pair<int, int> p : counts) {
+        ret += ((p.second - 1) * p.second) / 2;
+    }
+    for (pair<int, int> p : counts2) {
+        ret += ((p.second - 1) * p.second) / 2;
+    }
+
+    cout << ret << endl;
+
     return 0;
 }
+

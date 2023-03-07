@@ -43,5 +43,27 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    map<char, vector<int>> positions;
+
+    int n, k;
+    cin >> n >> k;
+    for (int i = 0; i < n; i++) {
+        char c;
+        cin >> c;
+        positions[c].push_back(i);
+    }
+
+    vector<pair<int, char>> vp;
+    for (pair<char, vector<int>> p : positions) {
+        int i = min(static_cast<int>(p.second.size()), k);
+        k -= i;
+        for (; i < p.second.size(); i++)
+            vp.push_back({p.second[i], p.first});
+    }
+    sort(vp.begin(), vp.end());
+    for (pair<int, char> p : vp) cout << p.second;
+    cout << endl;
+
     return 0;
 }
+

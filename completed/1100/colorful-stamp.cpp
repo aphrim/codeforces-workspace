@@ -1,8 +1,3 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
 
@@ -43,5 +38,28 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        int curB = 0, curR = 0;
+        bool flag = true;
+        while (n--) {
+            char c;
+            cin >> c;
+            if (c == 'B') curB++;
+            else if (c == 'R') curR++;
+            else {
+                if ((curB > 0 || curR > 0) && (curB == 0 || curR == 0)) flag = false;
+                curB = 0, curR = 0;
+            }
+        }
+        if ((curB > 0 || curR > 0) && (curB == 0 || curR == 0)) flag = false;
+        if (flag) cout << "YES" << endl;
+        else cout << "NO" << endl;
+
+
+    }
 }
+

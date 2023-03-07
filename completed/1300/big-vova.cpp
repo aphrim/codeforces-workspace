@@ -38,10 +38,64 @@ bool isPrime(int x) {
     return true;
 }
 
+set<int> factorize(int x) {
+    set<int> ret;
+    for (int i = 1; i <= sqrt(x); i++) {
+        if (x % i == 0)
+            ret.insert(i), ret.insert(x / i);
+    }
+    return ret;
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        map<int, int> counts;
+        int ma = 0;
+        for (int i = 0; i < n; i++) {
+            int x;
+            cin >> x;
+            counts[x]++;
+            ma = max(ma, x);
+        }
+
+        counts[ma]--;
+        if (counts[ma] == 0)
+            counts.erase(ma);
+        set<int> factors = factorize(ma);
+        cout << ma << " ";
+        n--;
+
+        while (n--) {
+            int maxFactor = INT_MIN, x;
+            for (pair<int, int> p : counts) {
+                for (int factor : factors) {
+                    if (p.first % factor == 0 && factor > maxFactor) {
+                        maxFactor = factor;
+                        x = p.first;
+                    }
+                }
+            }
+            counts[x]--;
+            if (counts[x] == 0)
+                counts.erase(x);
+            cout << x << " ";
+            set<int> factorsNew;
+            for (int factor : factors) if (x % factor == 0) factorsNew.insert(factor);
+            factors = factorsNew;
+        }
+
+        cout << endl;
+
+    }
+
     return 0;
 }
+

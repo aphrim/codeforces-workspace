@@ -38,10 +38,35 @@ bool isPrime(int x) {
     return true;
 }
 
+
+vector<int> fac(11);
+
+void factorial() {
+	fac[0] = 1;
+	for (int i = 1; i <= 10; i++) {
+		fac[i] = fac[i - 1] * i;
+	}
+}
+
+int ncr(int n, int k) {
+	if (k == 0 || k == n) {
+		return 1;
+	}
+	return (ncr(n - 1, k - 1) + ncr(n - 1, k));
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
+    //ncr(n / 2, n) * (n / 2 - 1)!
+
+    int x;
+    cin >> x;
+    factorial();
+    int ret = ncr(x, x / 2) * fac[x / 2 - 1] * fac[x / 2 - 1] / 2;
+    cout << ret << endl;
     return 0;
 }
+

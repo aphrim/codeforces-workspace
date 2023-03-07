@@ -43,5 +43,28 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n, t, k, d;
+    cin >> n >> t >> k >> d;
+
+    int t1 = 0, t2 = 0;
+    t1 = t * largeDiv(n, k);
+
+    int o1 = 0, o2 = -1;
+    while (n > 0) {
+        t2++;
+        o1++;
+        if (t2 == d) {
+            o2 = 0;
+        } else if (t2 > d) o2++;
+        if (o1 == t) n -= k, o1 = 0;
+        if (o2 == t) n -= k, o2 = 0;
+    }
+
+    if (t2 < t1) 
+        cout  << "YES" << endl;
+    else
+        cout << "NO" << endl;
+
     return 0;
 }
+

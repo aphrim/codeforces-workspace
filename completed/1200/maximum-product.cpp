@@ -43,5 +43,25 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        cin >> a;
+        sort(a.begin(), a.end());
+
+        int ret = -pow(2, 63);
+        for (int i = 0; i <= 5; i++) {
+            int prod = 1;
+            for (int j = n - (5 - i); j < n; j++) prod *= a[j];
+            for (int j = i - 1; j >= 0; j--) prod *= a[j];
+            ret = max(ret, prod);
+        }
+        cout << ret << endl;
+    }
+
     return 0;
 }
+

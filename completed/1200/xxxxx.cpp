@@ -43,5 +43,30 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, x;
+        cin >> n >> x;
+
+        vector<int> prefixSum(n + 1);
+        int fnz = INT_MAX;
+        for (int i = 1; i <= n; i++) {
+            int y;
+            cin >> y;
+            prefixSum[i] = (prefixSum[i - 1] + y) % x;
+            if (prefixSum[i] != 0) fnz = min(fnz, i);
+        }
+        
+        int ret = -1;
+        for (int i = 1; i <= n; i++) {
+            int cur = i;
+            if (prefixSum[i] % x == 0) cur -= fnz;
+            ret = max(ret, cur);
+        }
+        cout << ret << endl;
+    }
+
     return 0;
 }
+

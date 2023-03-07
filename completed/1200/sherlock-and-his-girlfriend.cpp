@@ -43,5 +43,15 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n;
+    cin >> n;
+    if (n <= 2) cout << 1 << endl;
+    else cout << 2 << endl;
+    for (int i = 2; i <= n + 1; i++) {
+        cout << (!isPrime(i)) + 1 << " ";
+    }
+
+
     return 0;
 }
+

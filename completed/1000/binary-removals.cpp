@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -43,5 +40,23 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int t;
+    cin >> t;
+    while (t--) {
+        string s;
+        cin >> s;
+
+        bool encounteredDual1 = false, flag = false;;
+        for (int i = 1; i < s.size(); i++) {
+            if (s[i] == '1' && s[i-1] == '1') encounteredDual1 = true;
+            if (encounteredDual1 && s[i] == '0' && s[i-1] == '0') flag = true;
+        }
+        if (flag) cout << "NO" << endl;
+        else cout << "YES" << endl;
+    }
 }

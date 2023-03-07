@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -27,14 +24,19 @@ struct custom_hash {
     }
 };
 
-int largeDiv(int a, int b) {
-    return (a + b - 1) / b;
-}
+bool c(string s, bool a, bool b, bool c) {
+    map<char, bool> m;
+    m['A'] = a;
+    m['B'] = b;
+    m['C'] = c;
 
-bool isPrime(int x) {
-    if (x== 1) return false;
-    for (int i = 2; i <= sqrt(x); i++)
-        if (x % i == 0) return false;
+    int depth = 0;
+    for (char c : s) {
+        if (m[c]) depth--;
+        else depth++;
+        if (depth < 0) return false;
+    }
+    if (depth != 0) return false;
     return true;
 }
 
@@ -43,5 +45,25 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int t;
+    cin >> t;
+    while (t--) {
+        string s;
+        cin >> s;
+        bool b = c(s, false, false, false)
+                || c(s, true, false, false)
+                || c(s, true, true, false)
+                || c(s, true, false, true)
+                || c(s, true, true, true)
+                || c(s, false, true, true)
+                || c(s, false, false, true)
+                || c(s, false, true, false);
+        if (b) cout << "YES" << endl;
+        else cout << "NO" << endl;
+    }
 }

@@ -43,5 +43,22 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        cin >> a;
+        int ret = 0, l = 0, r = 0;
+        while (l < n) {
+            while (r < n && a[r] > r - l) r++;
+            ret += r - l;
+            l++;
+        }
+        cout << ret << endl;
+    }
+
     return 0;
 }
+

@@ -5,6 +5,7 @@ LANG: C++
  */
 #include <bits/stdc++.h>
 #define int long long int
+#define cb(var,pos) ((var) & (1<<(pos)))
 
 using namespace std;
 
@@ -38,10 +39,39 @@ bool isPrime(int x) {
     return true;
 }
 
+int calcKicks(string s) {
+    int counta = 0, countb = 0;
+    int rema = 5, remb = 5;
+    for (int i = 0; i < 10; i++) {
+        if (i % 2 == 0) counta += s[i] == '1', rema--;
+        else countb += s[i] == '1', remb--;
+        if (counta > remb + countb || countb > rema + counta) return i + 1;
+    }
+    return 10;
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        string s;
+        cin >> s;
+        int ret = 10;
+        for (int i = 0; i < pow(2, 10); i++) {
+            string ss = s;
+            for (int b = 0; b < 10; b++) {
+                if (ss[b] == '?')
+                    ss[b] = '0' + ((cb(i, b)) ? 1 : 0);
+            }
+            ret = min(ret, calcKicks(ss));
+        }
+        cout << ret << endl;
+    }
+
     return 0;
 }
+

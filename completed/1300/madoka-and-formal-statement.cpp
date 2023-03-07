@@ -43,5 +43,28 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    //Needs to be sorted, all are greater
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n), b(n);
+        cin >> a >> b;
+        
+        bool flag = true;
+        for (int i = 0; i < n - 1; i++) {
+            if ((b[i+1] - b[i] < -1) && b[i] != a[i]) flag = false;
+            if (b[i] < a[i]) flag = false;
+        }
+        if (b[n-1] < a[n-1]) flag = false;
+        if ((b[0] - b[n - 1] < -1) && b[n - 1] != a[n - 1]) flag = false;
+
+        if (flag) cout << "YES" << endl;
+        else cout << "NO" << endl;
+
+    }
+
     return 0;
 }
+

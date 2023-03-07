@@ -38,10 +38,49 @@ bool isPrime(int x) {
     return true;
 }
 
+vector<int> factors(int x) {
+    vector<int> ret;
+    for (int i = 1; i <= sqrt(x); i++) {
+        if (x % i == 0) ret.push_back(i), ret.push_back(x / i);
+    }
+    return ret;
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, x, y;
+        cin >> n >> x >> y;
+        int diff = y - x;
+        int commonDiff = diff;
+        for (int factor : factors(diff)) {
+             if (diff / factor + 1 <= n) commonDiff = min(commonDiff, factor);
+        }
+        n -= diff / commonDiff + 1;
+        vector<int> ret;
+        for (int i = 0; i < diff / commonDiff + 1; i++) {
+            ret.push_back(commonDiff * i + x); 
+        }
+        for (int i = x - commonDiff; i >= 1; i -= commonDiff) {
+            if (n <= 0) break;
+            ret.push_back(i);
+            n--;
+        }
+        for (int i = y + commonDiff;; i += commonDiff) {
+            if (n <= 0) break;
+            ret.push_back(i);
+            n--;
+        }
+        cout << ret << endl;
+
+    }
+
+
     return 0;
 }
+

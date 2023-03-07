@@ -43,5 +43,27 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, s, k;
+        cin >> n >> s >> k;
+
+        set<int> closed;
+        while (k--) {
+            int x;
+            cin >> x;
+            closed.insert(x);
+        }
+
+        int i = 0;
+        for (;;i++) {
+            if ((!closed.count(s + i) && (s + i <= n))  || (!closed.count(s - i) && (s -  i >= 1))) break;
+        }
+
+        cout  << i << endl;
+    }
+
     return 0;
 }
+

@@ -43,5 +43,37 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<pair<int, int>> pkgs(n);
+        for (int i = 0; i < n; i++) cin >> pkgs[i].first >> pkgs[i].second;
+
+        sort(pkgs.begin(), pkgs.end(), [](pair<int, int> l, pair<int, int> r) {
+            if (l.first != r.first) return l.first < r.first;
+            else return l.second < r.second;
+        });
+
+        bool flag = true;
+        string ret = "";
+        for (int i = 0; i < pkgs[0].first; i++) ret += "R";
+        for (int i = 0; i < pkgs[0].second; i++) ret += "U";
+
+        for (int i = 1; i < n; i++) {
+            pair<int, int> cur = pkgs[i], last = pkgs[i-1];
+            if (cur.second < last.second) {
+                flag = false;
+                break;
+            }
+            for (int j = 0; j < cur.first - last.first; j++) ret += "R";
+            for (int j = 0; j < cur.second - last.second; j++) ret += "U";
+        }
+        if (flag) cout << "YES" << endl << ret << endl;
+        else cout << "NO" << endl;
+    }
+
     return 0;
 }
+

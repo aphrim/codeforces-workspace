@@ -43,5 +43,36 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> gs;
+        map<int, vector<int>> controlled;
+        for (int i = 0; i < n; i++) {
+            int x;
+            cin >> x;
+            if (controlled[x].size() == 0) gs.push_back(x);
+            controlled[x].push_back(i + 1);
+        }
+
+        if (gs.size() == 1) {
+            cout << "NO" << endl;
+            continue;
+        }
+        cout << "YES" << endl;
+
+        for (int i = 1; i < gs.size(); i++) {
+            for (int cont : controlled[gs[i]]) {
+                cout << cont << " " << controlled[gs[0]][0] << endl;
+            }
+        }
+        for (int i = 1; i < controlled[gs[0]].size(); i++) {
+            cout << controlled[gs[1]][0] << " " << controlled[gs[0]][i] << endl;
+        }
+    }
+
     return 0;
 }
+

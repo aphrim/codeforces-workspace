@@ -43,5 +43,34 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+
+
+        //Max value of min(p1, min(n - p2, p2 - p1)) where p1 and p2 are positions of particles of same type;
+
+        map<int, vector<int>> pp;
+        for (int i = 0; i < n; i++) {
+            int x;
+            cin >> x;
+            pp[x].push_back(i + 1);
+        }
+
+        int ret = -1;
+
+        for (pair<int, vector<int>> p : pp) {
+            sort(p.second.begin(), p.second.end());
+            for (int i = 1; i < p.second.size(); i++) {
+                ret = max(ret, n - p.second[i] + p.second[i-1]);
+            }
+        }
+
+        cout << ret << endl;
+    }
+
     return 0;
 }
+

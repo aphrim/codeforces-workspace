@@ -43,5 +43,41 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+
+        vector<vector<int>> a(n);
+        vector<pair<int, int>> costs;
+        for (int i = 0; i < n; i++) {
+            int k;
+            cin >> k;
+
+            int cost = 0;
+            for (int j = 0; j < k; j++) {
+                int x;
+                cin >> x;
+                cost = max(cost, x - j);
+                a[i].push_back(x);
+            }
+            costs.push_back({cost, i});
+        }
+        sort(costs.begin(), costs.end());
+
+        int ret = 0;
+        int i = 0;
+        for (pair<int, int> p : costs) {
+            for (int x : a[p.second]) {
+                ret = max(ret, x - i + 1); 
+                i++;
+            }
+        }
+        cout << ret << endl;
+
+    }
+
     return 0;
 }
+

@@ -43,5 +43,35 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        map<int, int> countA, countB;
+        int a, b, k;
+        cin >> a >> b >> k;
+
+        vector<pair<int, int>> pairs(k);
+        for (int i = 0; i < k; i++) {
+            int x;
+            cin >> x;
+            countA[x]++;
+            pairs[i].first = x;
+        }
+        for (int i = 0; i < k; i++) {
+            int x;
+            cin >> x;
+            countB[x]++;
+            pairs[i].second = x;
+        }
+
+        int ret = 0;
+        for (pair<int, int> p : pairs) {
+            ret += k - countA[p.first] - countB[p.second] + 1;
+        }
+
+        cout << ret / 2 << endl;
+    }
+
     return 0;
 }
+

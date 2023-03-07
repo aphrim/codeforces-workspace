@@ -38,10 +38,46 @@ bool isPrime(int x) {
     return true;
 }
 
+vector<int> factorize(int x) {
+    vector<int> ret;
+    for (int i = 1; i <= sqrt(x); i++) {
+        if (x % i == 0) ret.push_back(i), ret.push_back(x / i);
+    }
+    return ret;
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
+    //If can't be solved with 1 move, would be 2 moves [n, n - 1]
+
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        char c;
+        cin >> n >> c;
+        vector<int> positions;
+        set<int> factors;
+        for (int i = 0; i < n; i++) {
+            factors.insert(i + 1);
+            char in;
+            cin >> in;
+            if (in != c) {
+                positions.push_back(i + 1);
+                for (int f : factorize(positions.back())) factors.erase(f);
+            }
+        }
+        if (positions.size() == 0) cout << 0 << endl;
+        else if (factors.size() >= 1) cout << 1 << endl << *factors.begin() << endl;
+        else {
+            if (positions.back() == n) cout << 2 << endl <<  n << " " << n - 1 << endl;
+            else cout << 1 << endl << n << endl;
+        }
+    }
+
     return 0;
 }
+

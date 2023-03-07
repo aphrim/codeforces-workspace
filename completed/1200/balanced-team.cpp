@@ -43,5 +43,28 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n;
+    cin >> n;
+
+    vector<int> a(n);
+    cin >> a;
+    sort(a.begin(), a.end());
+
+    int ret = 1;
+    int i = 0, j = 1;
+    while (true) {
+        if (a[j] - a[i] <= 5) {
+            ret = max(ret, j - i + 1);
+            j++;
+            if (j == n) break;
+        } else {
+            i++;
+            if (i == n) break;
+        }
+    }
+
+    cout << ret << endl;
+
     return 0;
 }
+

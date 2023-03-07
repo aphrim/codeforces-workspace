@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -43,5 +40,28 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    set<int> cubes;
+    for (int i = 1; i < 10000; i++) cubes.insert(i * i * i);
+
+    int t;
+    cin >> t;
+    while (t--) {
+        int x;
+        cin >> x;
+        bool flag = false;
+        for (int cube : cubes) {
+            if (cubes.count(x - cube)) {
+                flag = true;
+                break;
+            }
+        }
+        if (flag) cout << "YES" << endl;
+        else cout << "NO" << endl;
+    }
 }
+

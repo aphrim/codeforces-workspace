@@ -43,5 +43,18 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    cin >> a;
+
+    if (a.back() == 0) cout << "UP" << endl;
+    else if (a.back() == 15) cout << "DOWN" << endl;
+    else if (n == 1) cout << -1 << endl;
+    else if (a[n-1] < a[n-2]) cout << "DOWN" << endl;
+    else cout << "UP" << endl;
+
+
     return 0;
 }
+

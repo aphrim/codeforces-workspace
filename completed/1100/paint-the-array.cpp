@@ -1,8 +1,3 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
 
@@ -43,5 +38,36 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        cin >> a;
+        int gcde = a[0], gcdo = a[1];
+
+        for (int i = 0; i < n; i++) {
+            if (i % 2 == 0) gcde = __gcd(gcde, a[i]);
+            else gcdo = __gcd(gcdo, a[i]);
+        }
+
+        bool flag = false;
+
+        flag = true;
+        for (int i = 1; i < n; i += 2)
+            if (a[i] % gcde == 0) flag = false;
+        if (flag)
+            cout << gcde << endl;
+
+        if (!flag) {
+            flag = true;
+            for (int i = 0; i < n; i += 2)
+                if (a[i] % gcdo == 0) flag = false;
+            if (flag)
+                cout << gcdo << endl;
+        }
+
+        if (!flag) cout << 0 << endl;
+    }
 }

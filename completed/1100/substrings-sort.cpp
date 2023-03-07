@@ -1,8 +1,3 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
 
@@ -38,10 +33,32 @@ bool isPrime(int x) {
     return true;
 }
 
+bool is(string a, string b) {
+    return (a.find(b) != string::npos);
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+    int n;
+    cin >> n;
+    vector<string> v(n);
+    cin >> v;
+    bool flag = true;
+    sort(v.begin(), v.end(), [&](string a, string b) {
+        if (is(a, b)) return false;
+        else if (is(b, a)) return true;
+        else {
+            flag = false;
+            return false;
+        }
+    });
+    if (!flag) cout << "NO" << endl;
+    else {
+        cout << "YES" << endl;
+        for (string s : v) cout << s << endl;
+    }
 }
+

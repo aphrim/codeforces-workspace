@@ -43,5 +43,23 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n, k;
+    cin >> n >> k;
+    vector<int> a(n);
+    cin >> a;
+    sort(a.begin(), a.end());
+    a = vector<int>(a.begin() + n / 2, a.end());
+
+    n = n / 2 + 1;
+    for (int i = 1; i < n; i++) {
+        int add = min(k, (a[i] - a[0]) * i);
+        a[0] += add / i;
+        k -= add;
+    }
+    a[0] += k / n;
+    cout << a[0] << endl;
+        
+
     return 0;
 }
+

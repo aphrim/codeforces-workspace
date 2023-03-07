@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -27,15 +24,13 @@ struct custom_hash {
     }
 };
 
-int largeDiv(int a, int b) {
-    return (a + b - 1) / b;
-}
-
-bool isPrime(int x) {
-    if (x== 1) return false;
-    for (int i = 2; i <= sqrt(x); i++)
-        if (x % i == 0) return false;
-    return true;
+int oddCount(int r, int g, int b, int w) {
+    int ret = 0;
+    ret += r % 2 == 1;
+    ret += g % 2 == 1;
+    ret += b % 2 == 1;
+    ret += w % 2 == 1;
+    return ret;
 }
 
 int32_t main() {
@@ -43,5 +38,19 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int t;
+    cin >> t;
+    while (t--) {
+        int r, g, b, w;
+        cin >> r >> g >> b >> w;
+
+
+        if (oddCount(r,g,b,w) <= 1 || (min(r,min(g,b)) >= 1 && oddCount(r-1, g-1, b-1, w+1) <= 1) || (min(r,min(g,b)) >= 2 && oddCount(r-2,g-2,b-2,w+2) <= 1)) cout << "YES" << endl;
+        else cout << "NO" << endl;
+    }
 }

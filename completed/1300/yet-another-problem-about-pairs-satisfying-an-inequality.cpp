@@ -43,5 +43,34 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    //Delete indicies where a[i] >= i
+    //Split into arrays index and value
+    //Sort, count numbers less than for each
+
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> inds, vals;
+        for (int i = 0; i < n; i++) {
+            int x;
+            cin >> x;
+            if (x < i + 1) inds.push_back(i+1), vals.push_back(x);
+        }
+        sort(inds.begin(), inds.end());
+        sort(vals.begin(), vals.end());
+
+        int i = 0, j = 0;
+        int ret = 0;
+        while (i < vals.size()) {
+            while (j < vals.size() && inds[j] < vals[i]) j++;
+            ret += j;
+            i++;
+        }
+        cout << ret << endl;
+    }
+
     return 0;
 }
+

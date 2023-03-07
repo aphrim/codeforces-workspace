@@ -1,8 +1,3 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
 
@@ -43,5 +38,19 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+    int n, m;
+    cin >> n >> m;
+
+    vector<int> mult(6);
+    mult[0] = m / 5;
+    for (int i = 1; i <= 5; i++) {
+        mult[i] = m / 5 + (m % 5 >= i);
+    }
+
+    int ret = 0;
+    for (int i = 1; i <= 5; i++) {
+        ret += (n / 5 + (n % 5 >= i)) * mult[5 - i]; 
+    }
+    cout << ret << endl;
 }
+

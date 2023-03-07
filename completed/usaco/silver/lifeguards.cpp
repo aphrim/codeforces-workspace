@@ -43,5 +43,44 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    freopen("lifeguards.in", "r", stdin);
+    freopen("lifeguards.out", "w", stdout);
+
+    int n;
+    cin >> n;
+    vector<pair<int, int>> times;
+    for (int i = 0; i < n; i++) {
+        int s, e;
+        cin >> s >> e;
+        times.push_back({s, i});
+        times.push_back({e, i});
+    }
+    sort(times.begin(), times.end());
+
+    int ret = 0;
+    int cur = 0, start = -1;
+    set<int> enc;
+    vector<int> aloneTime(n);
+    aloneTime[0] = INT_MAX;
+    for (int i = 0; i < times.size(); i++) {
+        if (cur == 1) {
+            aloneTime[*enc.begin()] += times[i].first - times[i - 1].first;
+        }
+        if (enc.count(times[i].second)) cur--, enc.erase(times[i].second);
+        else cur++, enc.insert(times[i].second);
+        if (cur > 0 && start == -1) start = times[i].first;
+        if (cur == 0 && start != -1) {
+            ret += times[i].first - start;
+            start = -1;
+        }
+    }
+    if (start != -1) {
+        ret += times.back().first - start;
+    }
+
+    ret -= *min_element(aloneTime.begin(), aloneTime.end());
+    cout << ret << endl;
+
     return 0;
 }
+

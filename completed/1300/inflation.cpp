@@ -38,10 +38,37 @@ bool isPrime(int x) {
     return true;
 }
 
+long double accCeil(long double x) {
+    if (x - floor(x) > 0.0001) return ceil(x);
+    else return floor(x);
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, k;
+        cin >> n >> k;
+        long double mult = 100 / (long double) k;
+        int curCost;
+        cin >> curCost;
+        n--;
+
+        int ret = 0;
+        while (n--) {
+            int add;
+            cin >> add;
+            int inc = max((long double) 0.0, accCeil(add * mult) - curCost);
+            ret += inc;
+            curCost += add + inc;
+        }
+        cout << ret << endl;
+    }
+
     return 0;
 }
+

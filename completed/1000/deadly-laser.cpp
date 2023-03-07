@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -43,5 +40,27 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, m, sx, sy, d;
+        cin >> n >> m >> sx >> sy >> d;
+
+        if (sx + sy - 2 <= d || (abs(n - sx) + abs(m - sy) <= d)) {
+            cout << -1 << endl;
+            continue;
+        }
+
+        bool ol = sx - 1 <= d, ob = sy - 1 <= d;
+        bool ou = m - sy <= d, ori = n - sx <= d;
+
+        if ((ol && ori) || (ob && ou) || (ob && ol) || (ori && ou)) cout << -1 << endl;
+        else cout << n + m - 2 << endl;
+
+    }
 }

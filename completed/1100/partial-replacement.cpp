@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -43,5 +40,35 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, k;
+        cin >> n >> k;
+
+        vector<int> positions;
+        set<int> filled;
+        for (int i = 0; i < n; i++) {
+            char c;
+            cin >> c;
+            if (c == '*') positions.push_back(i);
+        }
+        filled.insert(positions[0]);
+        filled.insert(positions.back());
+
+        int lastPos = positions[0];
+        for (int i = 1; i < positions.size(); i++) {
+            if (positions[i] - lastPos > k) {
+                filled.insert(positions[i-1]);
+                lastPos = positions[i-1];
+            }
+        }
+        cout << filled.size() << endl;
+    }
 }
+

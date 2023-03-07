@@ -43,5 +43,28 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        cin >> a;
+
+        bool flag = false;
+        int ret = -1;
+        for (int i = 1; i < n; i++) {
+            if (abs(a[i] - a[i-1]) >= 2) {
+                flag = true; 
+                ret = i;
+                break;
+            }
+        }
+
+        if (flag) cout << "YES\n" << ret << " " << ret + 1 << endl;
+        else cout << "NO" << endl;
+    }
+
     return 0;
 }
+

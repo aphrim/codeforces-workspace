@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -43,5 +40,44 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        n *= 2;
+        vector<int> a(n);
+        cin >> a;
+
+        vector<int> evenPositions, oddPositions;
+        for (int i = 0; i < n; i++) {
+            if (a[i] % 2 == 0) evenPositions.push_back(i);
+            else oddPositions.push_back(i);
+        }
+
+        if (oddPositions.size() % 2 == 1) {
+            oddPositions.pop_back();
+            evenPositions.pop_back();
+        } else if (oddPositions.size() > 0) {
+            oddPositions.pop_back();
+            oddPositions.pop_back();
+        } else {
+            evenPositions.pop_back();
+            evenPositions.pop_back();
+        }
+
+        for (int i = 0; i < evenPositions.size() / 2; i++) {
+            cout << evenPositions[2 * i] + 1 << " " << evenPositions[2 * i + 1] + 1 << endl;
+        }
+
+        for (int i = 0; i < oddPositions.size() / 2; i++) {
+            cout << oddPositions[2 * i] + 1 << " " << oddPositions[2 * i + 1] + 1 << endl;
+        }
+    }
 }
+

@@ -38,10 +38,37 @@ bool isPrime(int x) {
     return true;
 }
 
+int m(string a, string b) {
+    int i = 0, j = 0;
+    for (int i = 0; i < a.size(); i++) {
+        if (a[i] == b[j]) j++;
+    }
+    return j;
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
+    vector<string> powers(64);
+    for (int i = 0; i <= 63; i++) {
+        powers[i] = to_string(static_cast<int>(pow(2, i))); 
+    }
+
+    int t;
+    cin >> t;
+    while (t--) {
+        string s;
+        cin >> s;
+        int mi = INT_MAX;
+        for (string power : powers) {
+            int match = m(s, power);
+            mi = min(mi, static_cast<int>(s.size() + power.size() - 2 * match));
+        }
+        cout << mi << endl;
+    }
+
     return 0;
 }
+

@@ -43,5 +43,39 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n, q;
+    cin >> n >> q;
+
+    vector<int> a(n);
+    cin >> a;
+    int sum = 0;
+    for (int x : a) sum += x;
+    set<int> changed;
+    for (int i = 0; i < n; i++) changed.insert(i + 1);
+    int base = 0;
+    while (q--) {
+        int t;
+        cin >> t;
+        if (t == 1) {
+            int i, x;
+            cin >> i >> x;
+            if (changed.count(i)) {
+                sum += x - a[i - 1];
+            } else {
+                sum += x - base;
+            }
+            changed.insert(i);
+            a[i - 1] = x;
+        } else {
+            int x;
+            cin >> x;
+            sum = n * x;
+            base = x;
+            changed = set<int>();
+        }
+        cout << sum << endl;
+    }
+
     return 0;
 }
+

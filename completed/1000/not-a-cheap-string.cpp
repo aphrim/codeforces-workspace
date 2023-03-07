@@ -1,10 +1,7 @@
-/*
-ID: gregper1
-TASK: 
-LANG: C++
- */
 #include <bits/stdc++.h>
 #define int long long int
+
+//#define USACO
 
 using namespace std;
 
@@ -32,7 +29,6 @@ int largeDiv(int a, int b) {
 }
 
 bool isPrime(int x) {
-    if (x== 1) return false;
     for (int i = 2; i <= sqrt(x); i++)
         if (x % i == 0) return false;
     return true;
@@ -43,5 +39,42 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    return 0;
+#ifdef USACO
+    freopen("a.in", "r", stdin);
+    freopen("a.out", "w", stdout);
+#endif
+
+    int t;
+    cin >> t;
+    while (t--) {
+        string s;
+        int a;
+
+        cin >> s >> a;
+
+        vector<pair<char, int>> pv;
+
+        for (char c : s) pv.push_back({c, pv.size()});
+        sort(pv.begin(), pv.end());
+
+        int i = 0, sum = 0;
+        for (; i < pv.size(); i++) {
+            sum += pv[i].first - 'a' + 1;
+            if (sum > a) break;
+        }
+
+        pv = vector<pair<char, int>>(pv.begin(), pv.begin() + i);
+        sort(pv.begin(), pv.end(), [](pair<char, int> a, pair<char, int> b){
+            return a.second < b.second;
+        });
+        for (pair<char, int> p : pv)
+            cout << p.first;
+        cout << endl;
+
+
+
+
+
+
+    }
 }

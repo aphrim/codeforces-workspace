@@ -38,10 +38,34 @@ bool isPrime(int x) {
     return true;
 }
 
+bool flag = true;
+map<int, vector<int>> graph;
+
+bool dfs(int cur) {
+    int lc = 0;
+    for (int child : graph[cur]) lc += dfs(child);
+    if (graph[cur].size() > 0) flag &= lc >= 3;
+    return graph[cur].size() == 0;
+}
+
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
+    int n;
+    cin >> n;
+    for (int i = 2; i <= n; i++) {
+        int x;
+        cin >> x;
+        graph[x].push_back(i);
+    }
+
+    dfs(1);
+    if (flag) cout << "Yes" << endl;
+    else cout << "No" << endl;
+
     return 0;
 }
+

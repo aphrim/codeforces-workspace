@@ -43,5 +43,23 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    cin >> a;
+    sort(a.begin(), a.end());
+    int i = 0, j = 1;
+    int ret = 0;
+    set<int> used;
+    while (i < n) {
+        while (j != n && a[j] <= a[i]) j++;
+        if (j == n) break;
+        ret++;
+        j++;
+        i++;
+    }
+    cout << ret << endl;
+
     return 0;
 }
+

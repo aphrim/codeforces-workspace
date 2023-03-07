@@ -43,5 +43,38 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        cin >> a;
+
+        vector<vector<int>> moves;
+        int minSub = a[n-2] - a[n-1], maxVal = max(a[n-1], a[n-2]);
+        int mvI = n, subI = n - 1;
+        for (int i = n - 3; i >= 0; i--) {
+            a[i] = min(a[i], minSub);
+            if (a[i] == minSub)
+                moves.push_back({i + 1, subI, mvI});
+            if (a[i] - maxVal < minSub) subI = i + 1;
+            minSub = min(a[i] - maxVal, minSub);
+            if (a[i] > maxVal) mvI = i + 1;
+            maxVal = max(maxVal, a[i]);
+        }
+        bool flag = true;
+        for (int i = 1; i < n; i++) flag &= a[i] >= a[i-1];
+        if (!flag) cout << -1 << endl;
+        else {
+            cout << moves.size() << endl;
+            for (vector<int> v : moves)
+                cout << v << endl;
+        }
+
+
+    }
+
     return 0;
 }
+
