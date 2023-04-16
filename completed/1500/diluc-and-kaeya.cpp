@@ -38,32 +38,36 @@ bool isPrime(int x) {
     return true;
 }
 
+pair<int, int> rat(int a, int b) {
+    pair<int, int> ret = {a, b};
+    int gcf = __gcd(ret.first, ret.second);
+    ret.first /= gcf;
+    ret.second /= gcf;
+    return ret;
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
-    int n, m;
-    cin >> n >> m;
-    multiset<int> h;
-    vector<int> t(m);
-    for (int i = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        h.insert(x);
-    }
+    int t;
     cin >> t;
-
-
-    for (int i = 0; i < m; i++) {
-        auto ind = h.upper_bound(t[i]);
-        if (ind == h.begin()) 
-            cout << -1 << endl;
-        else {
-            ind--;
-            cout << *ind << endl;
-            h.erase(ind);
+    while (t--) {
+        map<pair<int, int>, int> ratioCounts;
+        int n;
+        cin >> n;
+        int d = 0, k = 0;
+        for (int i = 0; i < n; i++) {
+            char c;
+            cin >> c;
+            if (c == 'D') d++;
+            else k++;
+            pair<int, int> r = rat(d, k);
+            ratioCounts[r]++;
+            cout << ratioCounts[r] << " ";
         }
+        cout << endl;
     }
 
     return 0;

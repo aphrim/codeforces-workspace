@@ -43,18 +43,31 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    string pi = "314159265358979323846264338327";
-    int t;
-    cin >> t;
-    while (t--) {
-        string s;
-        cin >> s;
-        int i = 0;
-        for (; i < s.size(); i++) {
-            if (s[i] != pi[i]) break;
+    string s;
+    cin >> s;
+    int n = s.size();
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            for (int k = j + 1; k < n; k++) {
+                int x = (s[i] - '0') * 100 + (s[j] - '0') * 10 + s[k] - '0';
+                if (x %  8 == 0 && s[i] != '0') {
+                    cout << "YES" << endl << x << endl;
+                    return 0;
+                }
+            }
+            int x = (s[i] - '0') * 10 + (s[j] - '0');
+            if (x %  8 == 0 && s[i] != '0') {
+                cout << "YES" << endl << x << endl;
+                return 0;
+            }
         }
-        cout << i << endl;
+        int x = (s[i] - '0');
+        if (x %  8 == 0) {
+            cout << "YES" << endl << x << endl;
+            return 0;
+        }
     }
+    cout << "NO" << endl;
 
     return 0;
 }

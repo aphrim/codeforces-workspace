@@ -38,6 +38,24 @@ bool isPrime(int x) {
     return true;
 }
 
+int f(int x) {
+    if (x == 5) return 2;
+    else return 5;
+}
+
+vector<int> ret;
+vector<vector<pair<int, int>>> nodes;
+
+void dfs(int cur, int parent, int last) {
+    for (pair<int, int> p : nodes[cur]) {
+        if (p.first != parent) {
+            last = f(last);
+            ret[p.second] = last;
+            dfs(p.first, cur, last);
+        }
+    }
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
@@ -49,31 +67,27 @@ int32_t main() {
         int n;
         cin >> n;
 
-        vector<vector<int>> cols(n - 1, vector<int>(n));
-        vector<int> ret(n);
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n - 1; j++) {
-                cin >> cols[j][i];
+        nodes = vector<vector<pair<int, int>>>(n);
+        ret = vector<int>(n - 1);
+        bool flag = true;
+        for (int i = 0; i < n - 1; i++) {
+            int u, v;
+            cin >> u >> v;
+            u--, v--;
+            if (nodes[u].size() == 2 || nodes[v].size() == 2) {
+                flag = false;
             }
+            nodes[u].push_back({v, i});
+            nodes[v].push_back({u, i});
         }
-
-        map<int, int> counts;
-        for (int x : cols[0]) counts[x]++;
-        for (pair<int, int> p : counts) {
-            if (p.second == 1) ret[1] = p.first;
-            else ret[0] = p.first;
+        if (!flag) {
+            cout << -1 << endl;
+            continue;
         }
-
-        for (int i = 1; i < n - 1; i++) {
-            counts = map<int, int>(); 
-            for (int x : cols[i]) counts[x]++;
-            for (pair<int, int> p : counts) {
-                if ((p.second == i + 1) && (p.first != ret[i])) ret[i+1] = p.first;
-            }
-        }
-        
+        dfs(0, -1, 2);
         cout << ret << endl;
     }
+
 
     return 0;
 }

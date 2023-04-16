@@ -43,25 +43,30 @@ int32_t main() {
     cin.tie(0);
     cout.tie(0);
 
-    int t;
-    cin >> t;
-    while (t--) {
-        int n, s, r;
-        cin >> n >> s >> r;
-        int ma = s - r;
-        cout << s - r << " ";
-        n--, s = r;
-
-        int curSum = n * ma;
-        vector<int> ret(n, ma);
-        int i = 0;
-        while (curSum > s) {
-            ret[i] = max(ma - (curSum - s), 1ll);
-            curSum += ret[i] - ma;
-            i++;
+    int q;
+    cin >> q;
+    while (q--) {
+        int n, k;
+        cin >> n >> k;
+        vector<pair<int, int>> vp(k);
+        for (int i = 0; i < k; i++) cin >> vp[i].first;
+        for (int i = 0; i < k; i++) cin >> vp[i].second;
+        sort(vp.begin(), vp.end());
+        vector<int> leftDP(n, INT_MAX), rightDP(n, INT_MAX);
+        int j = 0;
+        for (int i = 0; i < n; i++) {
+            if (i > 0) leftDP[i] = leftDP[i-1] + 1;
+            if (j < k && vp[j].first - 1 == i) leftDP[i] = min(leftDP[i], vp[j].second), j++;
         }
-        cout << ret << endl;
-
+        j = k - 1;
+        for (int i = n - 1; i >= 0; i--) {
+            if (i < n - 1) rightDP[i] = rightDP[i+1] + 1;
+            if (j >= 0 && vp[j].first - 1 == i) rightDP[i] = min(rightDP[i], vp[j].second), j--;
+        }
+        for (int i = 0; i < n; i++) {
+            cout << min(leftDP[i], rightDP[i]) << " ";
+        }
+        cout << endl;
     }
 
     return 0;

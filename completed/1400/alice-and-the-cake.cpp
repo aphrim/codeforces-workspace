@@ -38,25 +38,43 @@ bool isPrime(int x) {
     return true;
 }
 
+map<int, int> counts;
+int curSize = 0, n;
+
+bool rec(int x) {
+    if (counts[x] > 0) {
+        curSize++;
+        counts[x]--;
+        return true;
+    }
+    if (curSize > n || x == 1) return false;
+    if (rec(x / 2) && rec((x + 1) / 2)) return true;
+    return false;
+}
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
-    int n, x;
-    cin >> n >> x;
-    vector<int> prefixSum(n + 1);
-    map<int, int> enc;
-    enc[0] = 1;
-    int ret = 0;
-    for (int i = 1; i <= n; i++) {
-        int y;
-        cin >> y;
-        prefixSum[i] = prefixSum[i-1] + y;
-        ret += enc[prefixSum[i] - x];
-        enc[prefixSum[i]]++;;
+    int t;
+    cin >> t;
+    while (t--) {
+        cin >> n;
+        int totalSum = 0;
+        counts = map<int, int>();
+        curSize = 0;
+        for (int i = 0; i < n; i++) {
+            int x;
+            cin >> x;
+            counts[x]++;
+            totalSum += x;
+        }
+
+        if (rec(totalSum)) cout << "YES" << endl;
+        else cout << "NO" << endl;
+        
     }
-    cout << ret << endl;
 
     return 0;
 }

@@ -38,38 +38,60 @@ bool isPrime(int x) {
     return true;
 }
 
+struct Cow {
+    int seniority;
+    int t;
+    int a;
+};
+
+struct set_cmp {
+    bool operator() (const Cow lhs, const Cow rhs) const {
+        return lhs.seniority > rhs.seniority; 
+    }
+};
+
 int32_t main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
-    int t;
-    cin >> t;
-    while (t--) {
-        int n;
-        cin >> n;
-        map<int, int> counts;
-        for (int i = 0; i < n; i++) {
-            int x;
-            cin >> x;
-            counts[x]++;
-        }
+    freopen("convention2.in", "r", stdin);
+    freopen("convention2.out", "w", stdout);
 
-        int sets = 0;
-        for (pair<int, int> p : counts) {
-            int i = 0, sub = p.second;
-            sets += p.second;
-            while (sub > 0) {
-                sub = min(sub, counts[p.first + i]);
-                counts[p.first + i] -= sub;
-                i++;
-            }
-        }
+    int n;
+    cin >> n;
 
-        cout << sets << endl;
-
+    vector<Cow> cows(n);
+    for (int i = 0; i < n; i++) {
+        cin >> cows[i].a >> cows[i].t; 
+        cows[i].seniority = n - i;
     }
 
+    sort(cows.begin(), cows.end(), [](Cow a, Cow b) {
+        return a.a < b.a;
+    });
+
+    int ret = 0, curEndTime = cows[0].a + cows[0].t;
+    set<Cow, set_cmp> queue;
+    int i = 1;
+    while(true){
+        int time = curEndTime;
+        while (i < n && cows[i].a <= time) {
+            queue.insert(cows[i]);
+            i++;
+        }
+        if (i == n) break;
+        if (queue.size() == 0) {
+            queue.insert(cows[i]);
+            curEndTime = cows[i].a;
+            i++;
+        }
+        Cow cur = *queue.begin();
+        ret = max(ret, curEndTime - cur.a);
+        curEndTime = curEndTime + cur.t;
+        queue.erase(cur);
+    }
+    cout << ret << endl;
     return 0;
 }
 
